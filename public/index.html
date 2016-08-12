@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="uapa">
+<head>
+	<meta charset="UTF-8">
+	<title>Auction</title>
+	<script src="scripts/libs/angular.min.js"></script>
+	<script src="scripts/libs/angular-route.min.js"></script>
+	<script src="scripts/app.js"></script>
+	<script src="scripts/appRoute.js"></script>
+
+	<!--Controllers-->
+	<script src="scripts/controllers/loginCtrl.js"></script>
+	<script src="scripts/controllers/registrationCtrl.js"></script>
+	<script src="scripts/controllers/homeCtrl.js"></script>
+	<script src="scripts/controllers/topMenuCtrl.js"></script>
+
+	<!--Services-->
+	<script src="scripts/services/apiSvc.js"></script>
+	<script src="scripts/services/registrationSvc.js"></script>
+
+	<!--Directives-->
+	<script src="scripts/directives/topMenuDrctv.js"></script>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div>
+	<top-menu></top-menu>
+	<div ng-view></div>
+</div>
+	
+</body>
+</html>

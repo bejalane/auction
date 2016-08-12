@@ -1,0 +1,9 @@
+<div class="container">
+	<form>
+		<div><label for="reg_username">Username: <input id="reg_username" name="username" ng-model="regData.name" type="text"></label></div>
+		<div><label for="reg_email">Email: <input id="reg_email" name="email" ng-model="regData.email" type="text"></label></div>
+		<div><label for="reg_password">Password: <input id="reg_password" name="password" ng-model="regData.password" type="password"></label></div>
+		<div><label for="reg_password_confirm">Confirm password: <input id="reg_password_confirm" name="password_confirm" ng-model="regData.passwordConfirm" type="password"></label></div>
+		<button ng-click="registerUser();">Submit</button>
+	</form>
+</div>

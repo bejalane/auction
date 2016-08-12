@@ -1,0 +1,29 @@
+.items-wrapper ul {
+	list-style: none;
+}
+
+.top-menu{
+	list-style: none;
+}
+
+.top-menu li{
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.items-wrapper li {
+	width: 100px;
+	display: inline-block;
+	margin-right: 20px;
+}
+.items-wrapper li img {
+	width: 100%;
+}
+
+.slide-wrapper {
+	width: 500px;
+}
+
+.slide-wrapper img {
+	width: 100%;
+}

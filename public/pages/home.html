@@ -1,0 +1,43 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12">
+			<h2 class="text-center">Season Summer 2016</h2>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="items-wrapper">
+        		<ul class="text-center">
+        			<li ng-repeat="pic in allproducts"><img ng-click="navToSlide($index)" src="{{pic.url}}" alt="{{pic.name}}"></li>
+        		</ul>
+        	</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="slide">
+	        	<div ng-click="navSlide('prev')">prev</div>
+	        	<div ng-click="navSlide('next')">next</div>
+	        	<div class="slide-wrapper"><img ng-click="navSlide('next')" src="{{allproducts[currentSlide].url}}" alt="allproducts[currentSlide].name"></div>
+	        	<h1>{{allproducts[currentSlide].name}}</h1>
+	        	<div>{{allproducts[currentSlide].description}}</div>
+        	</div>
+		</div>
+		<div class="col-sm-6">
+			<div>Current price: <strong>{{allproducts[currentSlide].currentPrice}}</strong> <strong>{{allproducts[currentSlide].currency}}</strong></div>
+			<div>Make a bid <input style="width:75px;" ng-model="addbid" type="number"><button ng-click="addBid(addbid, currentSlide)">add</button></div>
+			<div>Reserve price is <strong>{{allproducts[currentSlide].reservePriceReach}}</strong></div>
+			<div ng-if="allproducts[currentSlide].bids !== 0">Leader is {{allproducts[currentSlide].leader}}</div>
+			<div ng-show="allproducts[currentSlide].bids !== 0">Bids {{allproducts[currentSlide].bids}}</div>
+			<div ng-show="allproducts[currentSlide].bids === 0">There were no bids. Be first!</div>
+		</div>
+	</div>
+</div>
+        
+</div>

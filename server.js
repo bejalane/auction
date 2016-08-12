@@ -12,8 +12,10 @@ var jwt = require('jsonwebtoken');
 app.use(express.static(__dirname + "/public"));
 
 //use body-parser to get POST request fot API use
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 //Log requests to console
 app.use(morgan('dev'));
@@ -36,8 +38,11 @@ var apiRoutes = express.Router();
 app.use('/api/register' , require('./routes/registration'));
 //Authenticate the user and get a JWT
 app.use('/api/authenticate' , require('./routes/authenticate'));
-
-
+//TEST JWT
+apiRoutes.post('/test', passport.authenticate('jwt', {session: false}), function(req, res){
+	console.log('test is working');
+	res.send('It Worked! User id is: ' + req.user._id + '.');
+}); 
 
 
 //Protect dashbord route with JWT
@@ -46,7 +51,7 @@ apiRoutes.get('/dashboard', passport.authenticate('jwt', {session: false}), func
 }); 
 
 // Set url for API group routes
-//app.use('/api', apiRoutes);
+app.use('/api', apiRoutes);
 
 //home route
 app.get('/', function(req, res){

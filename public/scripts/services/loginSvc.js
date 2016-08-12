@@ -1,4 +1,4 @@
-app.service('loginSvc', ['$http', 'apiSvc', '$q', function($http, apiSvc, $q) {
+app.service('loginSvc', ['$http', 'apiSvc', '$q', '$cookies', function($http, apiSvc, $q, $cookies) {
     
 	this.login = function(user){
 		var defer = $q.defer();
@@ -9,6 +9,24 @@ app.service('loginSvc', ['$http', 'apiSvc', '$q', function($http, apiSvc, $q) {
 		    method: 'POST',
 		    data: user,
 		    url: apiSvc.environment + apiSvc.url.login,
+		})
+		.success(function (response) {
+		   	defer.resolve(response);
+		})
+		.error(function (error) {
+		    defer.resolve(error);
+		});
+
+		return defer.promise;
+	}
+
+	this.testTok = function(){
+		var defer = $q.defer();
+
+		$http({
+		    method: 'POST',
+		    url: apiSvc.environment + apiSvc.url.test,
+		    headers: { 'Content-Type': undefined ,'Accept': 'application/json', 'Authorization': $cookies.get('token') },
 		})
 		.success(function (response) {
 		   	defer.resolve(response);

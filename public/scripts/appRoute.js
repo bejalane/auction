@@ -1,20 +1,20 @@
 app.config(function($routeProvider) {
     $routeProvider
-        // route for the home page
+        // route for the login page
         .when('/', {
             templateUrl : 'pages/login.html',
             controller  : 'loginCtrl'
         })
 
-        // route for the about page
+        // route for the registration page
         .when('/registration', {
             templateUrl : 'pages/registration.html',
             controller  : 'registrationCtrl'
         })
 
-        // route for the contact page
-        .when('/contact', {
-            templateUrl : 'pages/blog.html',
-            controller  : 'blogController'
+        // route for the backoffice login page
+        .when('/backofficeLogin', {
+            templateUrl : 'pages/backofficeLogin.html',
+            controller  : 'backofficeLoginCtrl'
         });
 });

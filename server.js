@@ -43,18 +43,29 @@ app.use('/api/logout' , require('./routes/logout'));
 //TEST JWT
 app.use('/api/test' , require('./routes/test'));
 
+//Authenticate backoffice admin and get a JWT
+app.use('/api/backoffice/login' , require('./routesBackoffice/backofficeLogin'));
+//Logout from bsckoffice
+app.use('/api/backoffice/logout' , require('./routesBackoffice/backofficeLogout'));
+
+
+// Set url for API group routes
+app.use('/api', apiRoutes);
+apiRoutes.get('/dashboard', passport.authenticate('jwt', {session: false}), function(req, res){
+	res.send('It Worked! User id is: ' + req.user._id + '.');
+});
+
 // apiRoutes.post('/test', jwtAuth, function(req, res){
 // 	res.send({innerCode: 0, message: "Successfully authorised"});
 // }); 
 
 
-//Protect dashbord route with JWT
-apiRoutes.get('/dashboard', passport.authenticate('jwt', {session: false}), function(req, res){
-	res.send('It Worked! User id is: ' + req.user._id + '.');
-}); 
+// //Protect dashbord route with JWT
+// apiRoutes.get('/dashboard', passport.authenticate('jwt', {session: false}), function(req, res){
+// 	res.send('It Worked! User id is: ' + req.user._id + '.');
+// });
 
-// Set url for API group routes
-app.use('/api', apiRoutes);
+
 
 //home route
 app.get('/', function(req, res){

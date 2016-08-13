@@ -1,0 +1,14 @@
+<div class="container">
+	<form>
+		<label for="login_bo_email">Email: <input id="login_bo_email" name="email" ng-model="userBOLogin.email" type="text"></label>
+		<label for="login_bo_password">Password: <input id="login_bo_password" name="password" ng-model="userBOLogin.password" type="text"></label>
+		<button ng-click="boLogin()">Login</button>
+	</form>
+
+	<button ng-click="getTok()">cookie Token</button>
+
+	<button ng-click="tokenTest()">Token test</button>
+
+	<button ng-click="logout()">Logout</button>
+
+</div>

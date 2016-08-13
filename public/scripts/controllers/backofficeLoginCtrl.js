@@ -1,19 +1,22 @@
-app.controller('loginCtrl', ['$scope', '$location', '$cookies', 'loginSvc', function($scope, $location, $cookies, loginSvc) {
+app.controller('backofficeLoginCtrl', ['$scope', '$location', '$cookies', 'backofficeLoginSvc', function($scope, $location, $cookies, backofficeLoginSvc) {
     
     $scope.redirectToReg = function(){
         $location.path('/registration');
     }
 
-    $scope.login = function(){
-    	console.log($scope.userLogin);
+    $scope.boLogin = function(){
+    	console.log($scope.userBOLogin);
 
-    	loginSvc.login($scope.userLogin).then(
+    	backofficeLoginSvc.login($scope.userBOLogin).then(
         	function(response){
         		if(response.success){
         			console.log(response);
         			$cookies.put('token', response.token);
+                    console.log($scope.userBOLogin.email);
         			//$location.path('/dashboard');
-        		}
+        		} else {
+                    console.log(response);
+                }
         	},
         	function(error){
         		console.log(error);	
@@ -27,7 +30,7 @@ app.controller('loginCtrl', ['$scope', '$location', '$cookies', 'loginSvc', func
     }
 
     $scope.tokenTest = function(){
-    	loginSvc.testTok().then(
+    	backofficeLoginSvc.testTok().then(
             function(res){
                 console.log(res);
                 if(res === "Unauthorized"){
@@ -41,23 +44,11 @@ app.controller('loginCtrl', ['$scope', '$location', '$cookies', 'loginSvc', func
     }
 
     $scope.logout = function(){
-        loginSvc.logout().then(
+        backofficeLoginSvc.logout().then(
             function(res){
                 console.log(res);
-                $cookies.remove('token');
-            },
-            function(err){
-                console.log(err);
-            }
-        );
-    }
-
-    $scope.tokenTest2 = function(){
-        loginSvc.tokenTestSecond().then(
-            function(res){
-                console.log(res);
-                if(res === "Unauthorized"){
-
+                if(res.success){
+                    $cookies.remove('token');
                 }
             },
             function(err){

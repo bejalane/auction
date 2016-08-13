@@ -38,4 +38,22 @@ app.service('loginSvc', ['$http', 'apiSvc', '$q', '$cookies', function($http, ap
 		return defer.promise;
 	}
 
+	this.logout = function(){
+		var defer = $q.defer();
+
+		$http({
+		    method: 'POST',
+		    url: apiSvc.environment + apiSvc.url.logout,
+		    headers: { 'Content-Type': undefined ,'Accept': 'application/json', 'Authorization': $cookies.get('token') },
+		})
+		.success(function (response) {
+		   	defer.resolve(response);
+		})
+		.error(function (error) {
+		    defer.resolve(error);
+		});
+
+		return defer.promise;
+	}
+
 }]);

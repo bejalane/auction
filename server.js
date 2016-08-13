@@ -38,11 +38,14 @@ var apiRoutes = express.Router();
 app.use('/api/register' , require('./routes/registration'));
 //Authenticate the user and get a JWT
 app.use('/api/authenticate' , require('./routes/authenticate'));
+//Logout
+app.use('/api/logout' , require('./routes/logout'));
 //TEST JWT
-apiRoutes.post('/test', passport.authenticate('jwt', {session: false}), function(req, res){
-	console.log('test is working');
-	res.send('It Worked! User id is: ' + req.user._id + '.');
-}); 
+app.use('/api/test' , require('./routes/test'));
+
+// apiRoutes.post('/test', jwtAuth, function(req, res){
+// 	res.send({innerCode: 0, message: "Successfully authorised"});
+// }); 
 
 
 //Protect dashbord route with JWT

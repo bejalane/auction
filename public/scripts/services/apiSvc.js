@@ -5,7 +5,8 @@ app.service('apiSvc', function() {
 	this.url = {
 		registration: 'register',
 		login: 'authenticate',
-		test: 'test'
+		test: 'test',
+		logout: 'logout'
 	}
 
 });

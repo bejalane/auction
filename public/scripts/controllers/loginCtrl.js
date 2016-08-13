@@ -30,6 +30,21 @@ app.controller('loginCtrl', ['$scope', '$location', '$cookies', 'loginSvc', func
     	loginSvc.testTok().then(
             function(res){
                 console.log(res);
+                if(res === "Unauthorized"){
+
+                }
+            },
+            function(err){
+                console.log(err);
+            }
+        );
+    }
+
+    $scope.logout = function(){
+        loginSvc.logout().then(
+            function(res){
+                console.log(res);
+                $cookies.remove('token');
             },
             function(err){
                 console.log(err);

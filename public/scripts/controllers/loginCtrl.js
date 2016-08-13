@@ -51,19 +51,5 @@ app.controller('loginCtrl', ['$scope', '$location', '$cookies', 'loginSvc', func
             }
         );
     }
-
-    $scope.tokenTest2 = function(){
-        loginSvc.tokenTestSecond().then(
-            function(res){
-                console.log(res);
-                if(res === "Unauthorized"){
-
-                }
-            },
-            function(err){
-                console.log(err);
-            }
-        );
-    }
     
 }]);

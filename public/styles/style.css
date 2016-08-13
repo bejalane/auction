@@ -1,0 +1,65 @@
+.thumb{
+    width:100%;
+}
+
+.uploader{
+    clear:both;
+}
+
+.clear {
+	clear:both;
+}
+
+.flex-container {
+    display: -webkit-flex; /* Safari */
+    -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+
+}
+
+.flex-item {
+
+    width: 23%;
+    height: auto;
+    margin: 1%;
+}
+
+.add-pic-img-wrapper {
+	position: relative;
+	margin-top: 20px;
+}
+
+.remove-pic-img {
+	position: absolute;
+    height: 20px;
+    top: -20px;
+    right: 0;
+    cursor: pointer;
+}
+
+.remove-pic-img i.fa:hover {
+	color: red;
+	font-size: 18px;
+}
+
+.img-wrapper {
+	position: relative;
+}
+
+.overlay {
+	width: 100%;height: 100%;
+	position: absolute;
+	background-color: rgba(0,0,0,0.5);
+	opacity: 0;
+	top: 0;
+	color: #fff;
+	text-align: center;
+	font-size: 20px;
+	transition: all 0.2s;
+}
+.img-wrapper:hover .overlay {
+	opacity: 1;
+}

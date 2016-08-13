@@ -53,14 +53,14 @@ UserSchema.methods.comparePassword = function(pw, cb){
 	})
 }
 
-//Create admin verification
-UserSchema.methods.adminVerification = function(role){
-	bcrypt.compare(pw, this.password, function(err, isMatch){
-		if(err){
-			return cb(err);
-		}
-		cb(null, isMatch);
-	})
-}
+// //Create admin verification
+// UserSchema.methods.adminVerification = function(role){
+// 	bcrypt.compare(pw, this.password, function(err, isMatch){
+// 		if(err){
+// 			return cb(err);
+// 		}
+// 		cb(null, isMatch);
+// 	})
+// }
 
 module.exports = mongoose.model('User', UserSchema);

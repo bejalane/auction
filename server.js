@@ -48,12 +48,14 @@ app.use('/api/backoffice/login' , require('./routesBackoffice/backofficeLogin'))
 //Logout from bsckoffice
 app.use('/api/backoffice/logout' , require('./routesBackoffice/backofficeLogout'));
 
+//Catalogue controller from bsckoffice
+app.use('/api/backoffice/catalogue' , require('./routesBackoffice/backofficeCataloguesCtrl'));
 
 // Set url for API group routes
-app.use('/api', apiRoutes);
-apiRoutes.get('/dashboard', passport.authenticate('jwt', {session: false}), function(req, res){
-	res.send('It Worked! User id is: ' + req.user._id + '.');
-});
+// app.use('/api', apiRoutes);
+// apiRoutes.get('/dashboard', passport.authenticate('jwt', {session: false}), function(req, res){
+// 	res.send('It Worked! User id is: ' + req.user._id + '.');
+// });
 
 // apiRoutes.post('/test', jwtAuth, function(req, res){
 // 	res.send({innerCode: 0, message: "Successfully authorised"});

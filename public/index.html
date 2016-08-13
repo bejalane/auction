@@ -4,6 +4,10 @@
 	<meta charset="UTF-8">
 	<title>Auction</title>
 	<link rel="icon" href="http://app.unbounce.com/favicon.ico">
+
+	<!-- Styles -->
+	<link rel="stylesheet" href="styles/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	
 	<!--Libs-->
 	<script src="scripts/libs/angular.min.js"></script>
@@ -21,12 +25,14 @@
 	<script src="scripts/controllers/homeCtrl.js"></script>
 	<script src="scripts/controllers/topMenuCtrl.js"></script>
 	<script src="scripts/controllers/backofficeLoginCtrl.js"></script>
+	<script src="scripts/controllers/backofficeDashboardCtrl.js"></script>
 
 	<!--Services-->
 	<script src="scripts/services/apiSvc.js"></script>
 	<script src="scripts/services/registrationSvc.js"></script>
 	<script src="scripts/services/loginSvc.js"></script>
 	<script src="scripts/services/backofficeLoginSvc.js"></script>
+	<script src="scripts/services/backofficeDashboardSvc.js"></script>
 
 	<!--Directives-->
 	<script src="scripts/directives/topMenuDrctv.js"></script>
@@ -36,7 +42,7 @@
 </head>
 <body>
 <div>
-	<top-menu></top-menu>
+	
 	<div ng-view></div>
 </div>
 	

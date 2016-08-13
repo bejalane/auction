@@ -1,5 +1,7 @@
-app.controller('backofficeLoginCtrl', ['$scope', '$location', '$cookies', 'backofficeLoginSvc', function($scope, $location, $cookies, backofficeLoginSvc) {
+app.controller('backofficeLoginCtrl', ['$scope', '$rootScope', '$location', '$cookies', 'backofficeLoginSvc', function($scope, $rootScope, $location, $cookies, backofficeLoginSvc) {
     
+    $rootScope.loggedInAsAdmin = false;
+
     $scope.redirectToReg = function(){
         $location.path('/registration');
     }
@@ -12,8 +14,12 @@ app.controller('backofficeLoginCtrl', ['$scope', '$location', '$cookies', 'backo
         		if(response.success){
         			console.log(response);
         			$cookies.put('token', response.token);
-                    console.log($scope.userBOLogin.email);
-        			//$location.path('/dashboard');
+
+                    var expireDate = new Date();
+                    expireDate.setDate(expireDate.getMinutes() + 100);
+                    $cookies.put('loggedInAsAdmin', true, {'expires': expireDate});
+        			$location.path('/backoffice/dashboard');
+                    //$rootScope.loggedInAsAdmin = true;
         		} else {
                     console.log(response);
                 }
@@ -47,8 +53,9 @@ app.controller('backofficeLoginCtrl', ['$scope', '$location', '$cookies', 'backo
         backofficeLoginSvc.logout().then(
             function(res){
                 console.log(res);
-                if(res.success){
+                if(res.innerCode === 0){
                     $cookies.remove('token');
+                    $cookies.remove('loggedInAsAdmin');
                 }
             },
             function(err){

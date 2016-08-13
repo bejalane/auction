@@ -1,0 +1,64 @@
+<div class="container">
+	<div class="row">
+
+		<h4>Welcome to BO Dashboard!</h4>
+		<div class="col-lg-12">
+			<button class="btn btn-default" ng-click="showNewCatalogueForm = !showNewCatalogueForm">Add new catalogue</button>
+			<div ng-show="showNewCatalogueForm">
+				<form name="AddNewCatalogue">
+					<div class="form-group">
+					  <label for="newCatName">New Catalogue Name:</label>
+					  <input type="text" class="form-control" id="newCatName" ng-model="newCatalogue.name">
+					  <label for="newCatFrom">From:</label>
+					  <input type="date" class="form-control" id="newCatFrom" ng-model="newCatalogue.from">
+					  <label for="newCatTo">To:</label>
+					  <input type="date" class="form-control" id="newCatTo" ng-model="newCatalogue.to">
+					</div>
+					<button class="btn btn-success" ng-click="addNewCatalogue();">Submit</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+			<button class="btn btn-default" ng-click="showNewPaintingForm = !showNewPaintingForm">Add new painting</button>
+			<div ng-show="showNewPaintingForm">
+				<form name="AddNewCatalogue">
+					<div class="form-group">
+						<input type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" multiple />
+						<div class="flex-container">
+							<div class="flex-item" ng-repeat="step in stepsModel">
+								<div class="add-pic-img-wrapper">
+									<div class="remove-pic-img" ng-click="removeImg($index)"><i class="fa fa-times" aria-hidden="true"></i></div>
+						        	<div class="img-wrapper" ng-click="makeMainImage($index)">
+						        		<img class="thumb" ng-src="{{step.base64}}" />
+						        		<div class="overlay">Make this image main</div>
+						        	</div>
+						        	<div>
+						        		<ul>
+						        			<li>name: {{step.name}}</li>
+						        			<li>width: {{step.width}}</li>
+						        			<li>height: {{step.height}}</li>
+						        			<li>size: {{step.size}}</li>
+						        			<li>type: {{step.type}}</li>
+						        			<li>main: {{step.main}}</li>
+						        		</ul>
+						        	</div>
+						        </div>
+						    </div>
+    						<div class="clear"></div>
+    						
+						</div>
+					  	<label for="newPaintingName">New Painting Name:</label>
+					  	<input type="text" class="form-control" id="newPaintingName" ng-model="newPainting.name">
+					  	<label for="Season">Season:</label>
+					  	<input type="text" class="form-control" id="Season" ng-model="newPainting.season">
+					  	<label for="Description">Description:</label>
+					  	<textarea class="form-control" id="Description" ng-model="newPainting.description"></textarea>
+					</div>
+					<button class="btn btn-success" ng-click="addNewPainting();">Submit</button>
+				</form>
+			</div>
+		</div>
+
+	</div>
+</div>

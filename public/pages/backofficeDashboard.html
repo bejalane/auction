@@ -24,7 +24,7 @@
 			<div ng-show="showNewPaintingForm">
 				<form name="AddNewCatalogue">
 					<div class="form-group">
-						<input type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" multiple />
+						<input type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" name="paintings" multiple />
 						<div class="flex-container">
 							<div class="flex-item" ng-repeat="step in stepsModel">
 								<div class="add-pic-img-wrapper">
@@ -38,7 +38,7 @@
 						        			<li>name: {{step.name}}</li>
 						        			<li>width: {{step.width}}</li>
 						        			<li>height: {{step.height}}</li>
-						        			<li>size: {{step.size}}</li>
+						        			<li>size: {{step.weight}}</li>
 						        			<li>type: {{step.type}}</li>
 						        			<li>main: {{step.main}}</li>
 						        		</ul>

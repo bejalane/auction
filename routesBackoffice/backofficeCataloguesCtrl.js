@@ -19,4 +19,19 @@ router.post('/addNewCatalogue', tools.jwtAuthAdmin, function(req, res){
 	});
 }); 
 
+router.get('/getAllCatalogues', tools.jwtAuthAdmin, function(req, res){
+	console.log(req.body);
+	var newCatalogue = new Catalogue({
+		name: req.body.name,
+		from: req.body.from,
+		to: req.body.to
+	});
+	newCatalogue.save(function(err){
+		if(err){
+			return res.json({success: false, message: 'That catalogue already exists'})
+		}
+		res.json({success: true, message: 'Successfully created new catalogue'});
+	});
+});
+
 module.exports = router;

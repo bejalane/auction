@@ -45,11 +45,14 @@ app.use('/api/test' , require('./routes/test'));
 
 //Authenticate backoffice admin and get a JWT
 app.use('/api/backoffice/login' , require('./routesBackoffice/backofficeLogin'));
-//Logout from bsckoffice
+//Logout from backoffice
 app.use('/api/backoffice/logout' , require('./routesBackoffice/backofficeLogout'));
-
-//Catalogue controller from bsckoffice
+//Check Logged In Admin from backoffice
+app.use('/api/backoffice/checkLoggedIn' , require('./routesBackoffice/backofficeCheckLogin'));
+//Catalogue controller from backoffice
 app.use('/api/backoffice/catalogue' , require('./routesBackoffice/backofficeCataloguesCtrl'));
+//Painting controller from backoffice
+app.use('/api/backoffice/paintings' , require('./routesBackoffice/backofficePaintingsCtrl'));
 
 // Set url for API group routes
 // app.use('/api', apiRoutes);

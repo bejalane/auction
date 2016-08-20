@@ -14,7 +14,9 @@ app.service('apiSvc', function() {
 	this.backofficeRoutes = {
 		login: 'login',
 		logout: 'logout',
-		addNewCatalogue: 'catalogue/addNewCatalogue'
+		checkLoggedIn: 'checkLoggedIn',
+		addNewCatalogue: 'catalogue/addNewCatalogue',
+		addNewPainting: 'paintings/uploadNewPainting'
 	}
 
 });

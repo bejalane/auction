@@ -1,42 +1,18 @@
-app.service('backofficeDashboardSvc', ['$http', 'apiSvc', '$q', '$cookies', function($http, apiSvc, $q, $cookies) {
+app.service('backofficeDashboardSvc', ['$http', 'apiSvc', '$q', '$cookies', 'httpBOSvc', function($http, apiSvc, $q, $cookies, httpBOSvc) {
     
     //Check if User Logged In
 	this.checkLoggedIn = function(){
-		var defer = $q.defer();
+		return httpBOSvc.get('checkLoggedIn');
+	}
 
-		$http({
-		    method: 'GET',
-		    url: apiSvc.backofficeEnvironment + apiSvc.backofficeRoutes.checkLoggedIn,
-		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': $cookies.get('token') },
-		})
-		.success(function (response) {
-		   	defer.resolve(response);
-		})
-		.error(function (error) {
-		    defer.resolve(error);
-		});
-
-		return defer.promise;
+	//Get all catalogues
+	this.getAllCatalogues = function(){
+		return httpBOSvc.get('getAllCatalogues');
 	}
 
 	//Add New Catalogue
 	this.addNewCatalogue = function(newCatalogue){
-		var defer = $q.defer();
-
-		$http({
-		    method: 'POST',
-		    data: newCatalogue,
-		    url: apiSvc.backofficeEnvironment + apiSvc.backofficeRoutes.addNewCatalogue,
-		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': $cookies.get('token') },
-		})
-		.success(function (response) {
-		   	defer.resolve(response);
-		})
-		.error(function (error) {
-		    defer.resolve(error);
-		});
-
-		return defer.promise;
+		return httpBOSvc.post(newCatalogue, 'addNewCatalogue');
 	}
 
 	//Add New Painting

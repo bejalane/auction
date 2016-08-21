@@ -16,6 +16,7 @@ app.service('apiSvc', function() {
 		logout: 'logout',
 		checkLoggedIn: 'checkLoggedIn',
 		addNewCatalogue: 'catalogue/addNewCatalogue',
+		getAllCatalogues: 'catalogue/getAllCatalogues',
 		addNewPainting: 'paintings/uploadNewPainting'
 	}
 

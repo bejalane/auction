@@ -1,7 +1,7 @@
 app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'backofficeDashboardSvc', 
 	function($scope, $location, $cookies, backofficeDashboardSvc) {
     
-    function init(){
+    function checking(){
         backofficeDashboardSvc.checkLoggedIn().then(
             function(response){
                 console.log(response);
@@ -9,6 +9,8 @@ app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'b
                     $cookies.remove('token');
                     $cookies.remove('loggedInAsAdmin');
                     $location.path('/backoffice/login');
+                } else {
+                    init();
                 }
             },
             function(error){
@@ -16,7 +18,19 @@ app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'b
             }
         );
     }
-    init();
+    checking();
+
+    function init(){
+        backofficeDashboardSvc.getAllCatalogues().then(
+            function(response){
+                $scope.allCatalogues = response;
+                console.log(response);
+            },
+            function(response){
+                console.log(response);
+            }
+        );
+    }
 
     $scope.addNewCatalogue = function(){
     	var newCatalogue = $scope.newCatalogue;
@@ -121,6 +135,9 @@ app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'b
             }
         );
     }
+
+    //Get All Catalogues
+
 
     
 }]);

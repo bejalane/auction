@@ -6,11 +6,13 @@ var Catalogue = require('../app/models/catalogue');
 
 router.post('/addNewCatalogue', tools.jwtAuthAdmin, function(req, res){
 	console.log(req.body);
+
 	var newCatalogue = new Catalogue({
 		name: req.body.name,
 		from: req.body.from,
 		to: req.body.to
 	});
+	
 	newCatalogue.save(function(err){
 		if(err){
 			return res.json({success: false, message: 'That catalogue already exists'})
@@ -20,18 +22,12 @@ router.post('/addNewCatalogue', tools.jwtAuthAdmin, function(req, res){
 }); 
 
 router.get('/getAllCatalogues', tools.jwtAuthAdmin, function(req, res){
-	console.log(req.body);
-	var newCatalogue = new Catalogue({
-		name: req.body.name,
-		from: req.body.from,
-		to: req.body.to
-	});
-	newCatalogue.save(function(err){
+	Catalogue.find({}, function (err, docs) {
 		if(err){
-			return res.json({success: false, message: 'That catalogue already exists'})
+			return res.json({success: false, message: 'Can not get catalogues from db'});
 		}
-		res.json({success: true, message: 'Successfully created new catalogue'});
-	});
+        res.json(docs);
+    });
 });
 
 module.exports = router;

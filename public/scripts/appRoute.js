@@ -4,8 +4,14 @@ app.config(function($routeProvider) {
     $cookies = _$cookies_;
   }]);
     $routeProvider
-        // route for the login page
+        // route for the home page
         .when('/', {
+            templateUrl : 'pages/home.html',
+            controller  : 'homeCtrl'
+        })
+
+        // route for the login page
+        .when('/login', {
             templateUrl : 'pages/login.html',
             controller  : 'loginCtrl'
         })

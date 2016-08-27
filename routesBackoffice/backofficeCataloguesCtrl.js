@@ -5,8 +5,6 @@ var tools = require('../tools/tools');
 var Catalogue = require('../app/models/catalogue');
 
 router.post('/addNewCatalogue', tools.jwtAuthAdmin, function(req, res){
-	console.log(req.body);
-
 	var newCatalogue = new Catalogue({
 		name: req.body.name,
 		from: req.body.from,

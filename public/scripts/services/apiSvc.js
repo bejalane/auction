@@ -17,7 +17,8 @@ app.service('apiSvc', function() {
 		checkLoggedIn: 'checkLoggedIn',
 		addNewCatalogue: 'catalogue/addNewCatalogue',
 		getAllCatalogues: 'catalogue/getAllCatalogues',
-		addNewPainting: 'paintings/uploadNewPainting'
+		addNewPainting: 'paintings/uploadNewPainting',
+		saveNewPaintings: 'paintings/saveNewPaintings'
 	}
 
 });

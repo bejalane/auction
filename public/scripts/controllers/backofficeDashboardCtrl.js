@@ -69,6 +69,7 @@ app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'b
 			            		newPicture.name = f.name;
 			            		newPicture.type = f.type;
 			            		newPicture.weight = f.size/1000000 + ' mb';
+                                console.log(i);
 			            		$scope.addPic(newPicture);
                         	}
 				        });
@@ -104,8 +105,6 @@ app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'b
     $scope.addNewPainting = function(){
         var arr = Object.keys($scope.picFiles).map(function (key) {return $scope.picFiles[key]});
 
-        console.log(arr);
-        console.log($scope.stepsModel);
 
         for(var n=0; n<arr.length; n++){
             var firstObject = $scope.stepsModel[n];
@@ -119,21 +118,48 @@ app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'b
             }
         }
 
-        console.log(arr);
 
         var fd = new FormData();
         for (var i = 0; i < arr.length; i++) {
             fd.append("paintings", arr[i]);
         }
 
+
         backofficeDashboardSvc.addNewPainting(fd).then(
             function(response){
-                console.log(response);
+                if(response.innerCode === 0){
+                    sendPaintingsToDB(arr, response.file);
+                }
             },
             function(err){
                 console.log(err);
             }
         );
+    }
+
+    function sendPaintingsToDB(paintings, files){
+        $scope.newPainting.pics = [];
+        if(paintings.length === files.length){
+            for(var i=0; i<paintings.length; i++){
+                var pic = {};
+                pic.path = files[i].destination + '/' + files[i].filename;
+                pic.name = files[i].originalname;
+                pic.main = paintings[i].main;
+                $scope.newPainting.pics.push(pic);
+            }
+            console.log($scope.newPainting);
+            backofficeDashboardSvc.saveNewPaintings($scope.newPainting).then(
+                function(response){
+                    console.log(response);
+                },
+                function(err){
+                    console.log(err);
+                }
+            );
+        } else {
+            console.log('Smth went wrong! Number of files doesnt match.');
+        }
+        
     }
 
     //Get All Catalogues

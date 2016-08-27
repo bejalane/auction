@@ -15,6 +15,11 @@ app.service('backofficeDashboardSvc', ['$http', 'apiSvc', '$q', '$cookies', 'htt
 		return httpBOSvc.post(newCatalogue, 'addNewCatalogue');
 	}
 
+	//Save New Paintings
+	this.saveNewPaintings = function(newPaintings){
+		return httpBOSvc.post(newPaintings, 'saveNewPaintings');
+	}
+
 	//Add New Painting
 	this.addNewPainting = function(data){
 		var defer = $q.defer();

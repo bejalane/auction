@@ -51,7 +51,7 @@
 					  	<label for="newPaintingName">New Painting Name:</label>
 					  	<input type="text" class="form-control" id="newPaintingName" ng-model="newPainting.name">
 					  	<label for="Season">Season:</label>
-						<select class="form-control" ng-model="newPainting.season" ng-options="item.name as item.name for item in allCatalogues"></select>
+						<select class="form-control" ng-model="newPainting.season" ng-options="item._id as item.name for item in allCatalogues"></select>
 					  	<label for="Description">Description:</label>
 					  	<textarea class="form-control" id="Description" ng-model="newPainting.description"></textarea>
 					</div>

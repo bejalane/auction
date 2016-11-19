@@ -1,12 +1,12 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-12">
 			<h2 class="text-center">Season Summer 2016</h2>
 		</div>
 	</div>
 </div>
-
-<div class="container-fluid">
+ -->
+<!-- <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="items-wrapper">
@@ -38,6 +38,23 @@
 			<div ng-show="allproducts[currentSlide].bids === 0">There were no bids. Be first!</div>
 		</div>
 	</div>
+</div> -->
+<div class="container-fluid">   
+	<div class="dropdown">
+	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{home.currentSeason.name}}
+	  <span class="caret"></span></button>
+	  <ul class="dropdown-menu">
+	    <li ng-repeat="season in home.seasons"><a ng-click="home.changeSeason(season);">{{season.name}}</a></li>
+	  </ul>
+	</div>
 </div>
-        
+
+<div class="container-fluid">
+	<div ng-repeat="pic in home.seasonPaintings">
+		<div>name: {{pic.name}}</div>
+		<div>desc: {{pic.description}}</div>
+		<div ng-repeat="img in pic.pics">
+			<img ng-src="{{img.path}}"  alt="" width="200" ng-if="img.main">
+		</div>
+	</div>
 </div>

@@ -7,7 +7,8 @@ app.config(function($routeProvider) {
         // route for the home page
         .when('/', {
             templateUrl : 'pages/home.html',
-            controller  : 'homeCtrl'
+            controller  : 'homeCtrl',
+            controllerAs: 'home'
         })
 
         // route for the login page

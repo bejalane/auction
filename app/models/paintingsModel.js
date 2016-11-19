@@ -13,7 +13,7 @@ var PaintingsSchema = new mongoose.Schema({
 	season: {
 		type: String,
 		required: true,
-		unique: true
+		unique: false
 	},
 	pics: [{
 		main: {type: Boolean, required: true},

@@ -43,6 +43,12 @@ app.use('/api/logout' , require('./routes/logout'));
 //TEST JWT
 app.use('/api/test' , require('./routes/test'));
 
+//APPLICATION
+app.use('/api/catalogue' , require('./routes/cataloguesCtrl'));
+app.use('/api/paintings' , require('./routes/paintingsCtrl'));
+
+
+//BACKOFFICE
 //Authenticate backoffice admin and get a JWT
 app.use('/api/backoffice/login' , require('./routesBackoffice/backofficeLogin'));
 //Logout from backoffice

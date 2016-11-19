@@ -8,7 +8,9 @@ app.service('apiSvc', function() {
 		login: 'authenticate',
 		test: 'test',
 		logout: 'logout',
-		test2: 'dashboard'
+		test2: 'dashboard',
+		getAllCatalogues: 'catalogue/getAllCatalogues',
+		getPaintingsBySeason: 'paintings/getPaintingsBySeason'
 	}
 
 	this.backofficeRoutes = {

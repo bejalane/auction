@@ -22,7 +22,7 @@
 		<div class="col-lg-12">
 			<button class="btn btn-default" ng-click="showNewPaintingForm = !showNewPaintingForm">Add new painting</button>
 			<div ng-show="showNewPaintingForm">
-				<form name="AddNewCatalogue">
+				<form name="AddNewPainting">
 					<div class="form-group">
 						<input type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" name="paintings" multiple />
 						<div class="flex-container">
@@ -54,6 +54,11 @@
 						<select class="form-control" ng-model="newPainting.season" ng-options="item._id as item.name for item in allCatalogues"></select>
 					  	<label for="Description">Description:</label>
 					  	<textarea class="form-control" id="Description" ng-model="newPainting.description"></textarea>
+
+					  	<label for="newPaintingStartPrice">Start Price:</label>
+					  	<input type="number" class="form-control" id="newPaintingStartPrice" ng-model="newPainting.startPrice">
+					  	<label for="newPaintingReservePrice">Reserve Price:</label>
+					  	<input type="number" class="form-control" id="newPaintingReservePrice" ng-model="newPainting.reservePrice">
 					</div>
 					<button class="btn btn-success" ng-click="addNewPainting();">Submit</button>
 				</form>

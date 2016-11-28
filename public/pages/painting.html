@@ -1,0 +1,17 @@
+<div class="container-fluid">
+	<div>Name: {{pntg.pic.name}}</div>
+	<div>Description: {{pntg.pic.description}}</div>
+	<div>Start Price: {{pntg.price.startPrice}}</div>
+	<div>Reserve Price: {{pntg.price.reservePrice}}</div>
+	<div>Current Price: <input type="number" ng-model="pntg.currentPrice"></div>
+	<div ng-repeat="img in pntg.pic.pics">
+		<img ng-src="{{img.path}}"  alt="" width="200">
+	</div>
+</div>
+
+<p>
+BIDS:
+
+id | bid | userId | userName | date
+
+</p>

@@ -1,4 +1,4 @@
-app.controller('homeCtrl', function($scope, dataSvc) {
+app.controller('homeCtrl', function($scope, dataSvc, $location) {
 
     var home = this;
 
@@ -8,6 +8,7 @@ app.controller('homeCtrl', function($scope, dataSvc) {
                 home.seasons = res.data;
                 home.detectCurrentSeason(home.seasons);
                 home.getPaintingsBySeason(home.currentSeason);
+                console.log(home.seasons);
             }, 
             function(err){
                 console.log(err);
@@ -56,6 +57,11 @@ app.controller('homeCtrl', function($scope, dataSvc) {
     home.changeSeason = function(season){
         home.currentSeason = season;
         home.getPaintingsBySeason(home.currentSeason);
+    }
+
+    home.openPainting = function(index){
+        console.log(index);
+        $location.path('/painting/' + home.seasonPaintings[index].name + '/' + home.seasonPaintings[index]._id );
     }
 
 

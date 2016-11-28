@@ -23,6 +23,12 @@ app.config(function($routeProvider) {
             controller  : 'registrationCtrl'
         })
 
+        .when('/painting/:name/:painting', {
+            templateUrl : 'pages/painting.html',
+            controller  : 'paintingCtrl',
+            controllerAs: 'pntg'
+        })
+
         // route for the backoffice login page
         .when('/backoffice/login', {
             templateUrl : 'pages/backofficeLogin.html',

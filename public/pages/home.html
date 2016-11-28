@@ -54,7 +54,7 @@
 		<div>name: {{pic.name}}</div>
 		<div>desc: {{pic.description}}</div>
 		<div ng-repeat="img in pic.pics">
-			<img ng-src="{{img.path}}"  alt="" width="200" ng-if="img.main">
+			<img ng-src="{{img.path}}"  alt="" width="200" ng-if="img.main" ng-click="home.openPainting($parent.$index)">
 		</div>
 	</div>
 </div>

@@ -10,7 +10,8 @@ app.service('apiSvc', function() {
 		logout: 'logout',
 		test2: 'dashboard',
 		getAllCatalogues: 'catalogue/getAllCatalogues',
-		getPaintingsBySeason: 'paintings/getPaintingsBySeason'
+		getPaintingsBySeason: 'paintings/getPaintingsBySeason',
+		getPainting: 'paintings/getSinglePainting'
 	}
 
 	this.backofficeRoutes = {

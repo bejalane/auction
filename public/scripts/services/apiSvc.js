@@ -11,7 +11,9 @@ app.service('apiSvc', function() {
 		test2: 'dashboard',
 		getAllCatalogues: 'catalogue/getAllCatalogues',
 		getPaintingsBySeason: 'paintings/getPaintingsBySeason',
-		getPainting: 'paintings/getSinglePainting'
+		getPainting: 'paintings/getSinglePainting',
+		getBids: 'paintings/getBids',
+		setBid: 'paintings/setBid'
 	}
 
 	this.backofficeRoutes = {

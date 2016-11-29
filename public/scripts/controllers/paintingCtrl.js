@@ -20,6 +20,46 @@ app.controller('paintingCtrl', function($scope, $route, $routeParams, paintingSv
 		}
 	);
 
+	paintingSvc.getBids($routeParams.painting).then(
+		function(res){
+			console.log(res);
+			pntg.currentPrice = res.data[res.data.length-1].bid;
+			pntg.leader = res.data[res.data.length-1].userName;
+			pntg.previous = res.data[res.data.length-2].userName;
+			pntg.newBid = angular.copy(pntg.currentPrice + 10);
+		},
+		function(err){
+			console.log(err);
+		}
+	);
+
+	pntg.setNewBid = function(){
+		console.log(pntg.currentPrice);
+		if(!pntg.currentPrice){
+			return;
+		}
+
+		if(pntg.currentPrice >= newBid){
+			return;
+		}
+
+		var bid = {};
+		bid.paintingId = $routeParams.painting;
+		bid.bid = pntg.newBid;
+		bid.userId = 2;
+		bid.userName = 'John';
+		bid.date = Date.now();
+
+		paintingSvc.setBid(bid).then(
+			function(res){
+				console.log(res);
+			},
+			function(err){
+				console.log(err);
+			}
+		);
+	}
+
 	//MAYBE IT IS JUST FOR LOCALHOST
     function filterSrcForImg(data){
         for (var n = 0; n < data.pics.length; n++) {

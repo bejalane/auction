@@ -98,16 +98,16 @@ app.controller('paintingCtrl', function($scope, $rootScope, $route, $routeParams
 		bid.userName = 'Kolya';
 		bid.date = Date.now();
 
-		mySocket.emit('setNewBid', bid);
+		//mySocket.emit('setNewBid', bid);
 
-		// paintingSvc.setBid(bid).then(
-		// 	function(res){
-		// 		console.log(res);
-		// 	},
-		// 	function(err){
-		// 		console.log(err);
-		// 	}
-		// );
+		paintingSvc.setBid(bid).then(
+			function(res){
+				console.log(res);
+			},
+			function(err){
+				console.log(err);
+			}
+		);
 	}
 
 	//MAYBE IT IS JUST FOR LOCALHOST

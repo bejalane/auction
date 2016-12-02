@@ -12,7 +12,7 @@ var config = require('./config/main');
 var User = require('./app/models/user');
 var jwt = require('jsonwebtoken');
 
-var bids = require('./routes/bids')(io);
+//var bids = require('./routes/bids')(io);
 
 
 // io.on('connection', function (socket) {
@@ -67,7 +67,7 @@ app.use('/api/test' , require('./routes/test'));
 
 //APPLICATION
 app.use('/api/catalogue' , require('./routes/cataloguesCtrl'));
-app.use('/api/paintings' , require('./routes/paintingsCtrl'));
+app.use('/api/paintings' , require('./routes/paintingsCtrl')(io));
 
 
 //BACKOFFICE

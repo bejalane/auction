@@ -6,6 +6,31 @@ var Paintings = require('../app/models/paintingsModel');
 var Price = require('../app/models/price');
 var Bid = require('../app/models/bid');
 var async = require('async');
+var socketio = require('socket.io');
+
+exports = module.exports = function(io){
+var socketCount = 0;
+io.on('connection', function (socket) {
+
+	// Socket has connected, increase socket count
+    socketCount++
+    console.log('connections:' + socketCount);
+
+    socket.on('requestBids', function(data){
+    	Bid.find({'paintingId': data.id}, function (err, docs) {
+			if(err){
+				return res.json({success: false, code: 1000, message: 'Can not get catalogues from db'});
+			}
+	        socket.emit('bids', {success: true, code: 0, data: docs})
+	    });
+    });
+ 
+    socket.on('disconnect', function() {
+        socketCount--
+        console.log('connections:' + socketCount);
+    })
+ 
+});
 
 router.get('/getPaintingsBySeason/:id', function(req, res){
 	Paintings.find({'season': req.params.id}, function (err, docs) {
@@ -51,7 +76,7 @@ router.get('/getBids/:id', function(req, res){
     });
 });
 
-router.post('/setBid', function(req, res){
+router.post('/setBid', tools.jwtAuth, function(req, res){
 	var newBid = new Bid({
 		paintingId: req.body.paintingId,
 		bid: req.body.bid,
@@ -64,10 +89,20 @@ router.post('/setBid', function(req, res){
 		if(err){
 			return res.json({success: false, message: 'That bid wasnot saved'})
 		}
-		res.json({success: true, message: 'Successfully added new bid'});
+		//res.json({success: true, message: 'Successfully added new bid'});
+
+		Bid.find({'paintingId': req.body.paintingId}, function (err, docs) {
+			if(err){
+				return res.json({success: false, code: 1000, message: 'Can not get catalogues from db'});
+			}
+		    io.sockets.emit('newbids', {success: true, code: 0, data: docs})
+		});
+
+
 	});
 });
 
+return router;
 
+}
 
-module.exports = router;

@@ -4,7 +4,7 @@
 	<div>Current Price: <strong>{{pntg.currentPrice}}</strong></div>
 	<div>Start Price: {{pntg.price.startPrice}}</div>
 	<div>Reserve Price: {{pntg.price.reservePrice}}</div>
-	<div>Make a bid: <input type="number" ng-model="pntg.newBid"><button ng-click="pntg.setNewBid()">set</button></div>
+	<div>Make a bid: <input type="number" ng-model="pntg.newBid"><button ng-click="pntg.setNewBid(pntg.newBid)">set</button></div>
 	<div>Leader: {{pntg.leader}}</div>
 	<div>Previous: {{pntg.previous}}</div>
 	<div ng-repeat="img in pntg.pic.pics">

@@ -1,5 +1,9 @@
 var express = require('express');
 var app = express();
+
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
@@ -7,6 +11,24 @@ var passport = require('passport');
 var config = require('./config/main');
 var User = require('./app/models/user');
 var jwt = require('jsonwebtoken');
+
+var bids = require('./routes/bids')(io);
+
+
+// io.on('connection', function (socket) {
+
+// 	// Socket has connected, increase socket count
+// 	console.log('USER CONNECTED!');
+
+ 
+//     socket.on('disconnect', function() {
+//         // Decrease the socket count on a disconnect, emit
+//         console.log('USER DISCONNECTED!');
+
+//     });
+ 
+// });
+
 
 //Use client side with folder public
 app.use(express.static(__dirname + "/public"));
@@ -60,23 +82,6 @@ app.use('/api/backoffice/catalogue' , require('./routesBackoffice/backofficeCata
 //Painting controller from backoffice
 app.use('/api/backoffice/paintings' , require('./routesBackoffice/backofficePaintingsCtrl'));
 
-// Set url for API group routes
-// app.use('/api', apiRoutes);
-// apiRoutes.get('/dashboard', passport.authenticate('jwt', {session: false}), function(req, res){
-// 	res.send('It Worked! User id is: ' + req.user._id + '.');
-// });
-
-// apiRoutes.post('/test', jwtAuth, function(req, res){
-// 	res.send({innerCode: 0, message: "Successfully authorised"});
-// }); 
-
-
-// //Protect dashbord route with JWT
-// apiRoutes.get('/dashboard', passport.authenticate('jwt', {session: false}), function(req, res){
-// 	res.send('It Worked! User id is: ' + req.user._id + '.');
-// });
-
-
 
 //home route
 app.get('/', function(req, res){
@@ -86,5 +91,5 @@ app.get('/', function(req, res){
 
 var port = ('3000');
 
-app.listen(port);
+http.listen(port);
 console.log('Server is running on port ' + port);

@@ -8,6 +8,7 @@ router.post('/', function(req, res){
 		res.json({success: false, message: 'Please enter an email and password to register'});
 	} else {
 		var newUser = new User({
+			name: req.body.name,
 			email: req.body.email,
 			password: req.body.password
 		});
@@ -17,7 +18,7 @@ router.post('/', function(req, res){
 			if(err){
 				return res.json({success: false, message: 'That email address already exists'})
 			}
-			res.json({success: true, message: 'Successfully created new user'});
+			res.json({code: 0, success: true, message: 'Successfully created new user'});
 		});
 	}
 });

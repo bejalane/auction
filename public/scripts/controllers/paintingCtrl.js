@@ -1,7 +1,7 @@
 app.factory('mySocket', function (socketFactory) {
   return socketFactory();
 })
-app.controller('paintingCtrl', function($scope, $rootScope, $route, $routeParams, paintingSvc, mySocket) {
+app.controller('paintingCtrl', function($scope, $rootScope, $route, $routeParams, paintingSvc, mySocket, userSvc) {
 
 	var pntg = this;
 
@@ -94,14 +94,17 @@ app.controller('paintingCtrl', function($scope, $rootScope, $route, $routeParams
 		var bid = {};
 		bid.paintingId = $routeParams.painting;
 		bid.bid = pntg.newBid;
-		bid.userId = 2;
-		bid.userName = 'Kolya';
+		bid.userId = userSvc.getUserData("id");
+		bid.userName = userSvc.getUserData("name");
 		bid.date = Date.now();
 
 		//mySocket.emit('setNewBid', bid);
 
 		paintingSvc.setBid(bid).then(
 			function(res){
+				if(res.innerCode === 401){
+					pntg.showLogin = true;
+				}
 				console.log(res);
 			},
 			function(err){

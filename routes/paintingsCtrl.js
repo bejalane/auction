@@ -82,19 +82,21 @@ router.post('/setBid', tools.jwtAuth, function(req, res){
 		bid: req.body.bid,
 		userId: req.body.userId,
 		userName: req.body.userName,
-		date: req.body.date
+		date: Date.now()
 	});
 	
 	newBid.save(function(err){
 		if(err){
 			return res.json({success: false, message: 'That bid wasnot saved'})
 		}
-		//res.json({success: true, message: 'Successfully added new bid'});
+		res.json({success: true, message: 'Successfully added new bid'});
+		console.log('Successfully added new bid');
 
 		Bid.find({'paintingId': req.body.paintingId}, function (err, docs) {
 			if(err){
 				return res.json({success: false, code: 1000, message: 'Can not get catalogues from db'});
 			}
+			console.log('fetching bids after set new');
 		    io.sockets.emit('newbids', {success: true, code: 0, data: docs})
 		});
 

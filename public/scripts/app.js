@@ -1,1 +1,1 @@
-var app = angular.module('uapa',['ngRoute', 'ngCookies', 'btford.socket-io']);
+var app = angular.module('uapa',['ngRoute', 'ngCookies', 'btford.socket-io', 'LocalStorageModule']);

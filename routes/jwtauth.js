@@ -8,8 +8,8 @@ var jwt = require('jsonwebtoken');
 module.exports = function(req, res, next) {
 	var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
 
-	console.log(req);
-	console.log(req.body);
+	// console.log(req);
+	// console.log(req.body);
 
 	if (token) {
 	  try {

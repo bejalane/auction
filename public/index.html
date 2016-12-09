@@ -6,10 +6,10 @@
 	<link rel="icon" href="http://app.unbounce.com/favicon.ico">
 
 	<!-- Styles -->
-	<link rel="stylesheet" href="styles/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="styles/animate.css">
+	<link rel="stylesheet" href="styles/style.css">
 
 	<!--Libs-->
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
@@ -17,9 +17,8 @@
 	<script src="scripts/libs/angular.min.js"></script>
 	<script src="scripts/libs/angular-route.min.js"></script>
 	<script src="scripts/libs/angular-cookies.js"></script>
-
+	<script src="scripts/libs/angular-local-storage.js"></script>
 	<script src="scripts/libs/socket.js"></script>
-	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
@@ -38,6 +37,7 @@
 	<script src="scripts/controllers/backofficeDashboardCtrl.js"></script>
 
 	<!--Services-->
+	<script src="scripts/services/rootSvc.js"></script>
 	<script src="scripts/services/apiSvc.js"></script>
 	<script src="scripts/services/httpReqSvc.js"></script>
 	<script src="scripts/services/httpReqAppSvc.js"></script>
@@ -47,9 +47,15 @@
 	<script src="scripts/services/backofficeDashboardSvc.js"></script>
 	<script src="scripts/services/dataSvc.js"></script>
 	<script src="scripts/services/paintingSvc.js"></script>
+	<script src="scripts/services/userSvc.js"></script>
 
 	<!--Directives-->
-	<script src="scripts/directives/topMenuDrctv.js"></script>
+	<script src="scripts/directives/directivesTmpl/topMenuDrctv.js"></script>
+	<script src="scripts/directives/directivesTmpl/loginDrctv.js"></script>
+
+	<!--FRONT END-->
+	<script src="scripts/js-fed/js.js"></script>
+
 	
 	
 </head>

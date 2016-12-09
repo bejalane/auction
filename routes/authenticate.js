@@ -10,9 +10,10 @@ router.post('/', function(req, res){
 	User.findOne({
 		email: req.body.email
 	}, function(err, user){
+		console.log(user);
 		if(err) throw err;
 		if(!user){
-			res.send({success: false, message: 'Authentication failed. User not found'});
+			res.send({code: 4001, success: false, message: 'Authentication failed. User not found'});
 		} else {
 			//Check if the password macthes
 			user.comparePassword(req.body.password, function(err, isMatch){
@@ -20,9 +21,12 @@ router.post('/', function(req, res){
 					var token = jwt.sign(user, config.secret, {
 						expiresIn: 10000//in seconds
 					});
-					res.json({success: true, token: 'JWT ' + token});
+					var userObj = {};
+					userObj.name = user.name;
+					userObj.id = user._id;
+					res.json({code: 0, success: true, token: 'JWT ' + token, user: userObj});
 				} else {
-					res.send({success: false, message: 'Authentication failed. Password did not match.'});
+					res.send({code: 4002, success: false, message: 'Authentication failed. Password did not match.'});
 				}
 			});
 		}

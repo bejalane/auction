@@ -1,16 +1,31 @@
-<div class="container">
-	<form>
-		<label for="login_email">Email: <input id="login_email" name="email" ng-model="userLogin.email" type="text"></label>
-		<label for="login_password">Password: <input id="login_password" name="password" ng-model="userLogin.password" type="text"></label>
-		<button ng-click="login()">Login</button>
+<div class="container login-container" ng-click="login.closeForm()">
+	<div class="login-close"><i ng-click="login.closeForm()" class="fa fa-times" aria-hidden="true"></i></div>
+	<form class="login-container-form" ng-click="login.stopClose($event)" ng-show="login.loginFormShow">
+		<h1>Sign In</h1>
+		<div ng-show="login.userCreated" class="login-user-created">User has been created successfully. Please log in.</div>
+		<input class="login-inputs" id="login_email" name="email" ng-model="login.userLogin.email" type="text" placeholder="Email">
+		<input class="login-inputs" id="login_password" name="password" ng-model="login.userLogin.password" type="password" placeholder="Password">
+		<button ng-click="login.login()">Login</button>
+		<div class="login-container-registration">New user? <span ng-click="login.redirectToReg();">Sign Up</span></div>
 	</form>
 
-	<div>New user? <button ng-click="redirectToReg();">registration</button></div>
+	<form class="login-container-form" ng-click="login.stopClose($event)" ng-show="login.registrationFormShow">
+		<h1>Registration</h1>
+		<input id="reg_username" name="username" ng-model="login.regData.name" type="text" placeholder="Username">
+		<input id="reg_email" name="email" ng-model="login.regData.email" type="text" placeholder="Email">
+		<input id="reg_password" name="password" ng-model="login.regData.password" type="password" placeholder="Password">
+		<input id="reg_password_confirm" name="password_confirm" ng-model="login.regData.passwordConfirm" type="password" placeholder="Confirm Password">
+		<button ng-click="login.registerUser();">Submit</button>
+	</form>
+
+	<form ng-show="login.successLogin">
+		<h1 class="login-loggin-in">Loggin in</h1>
+	</form>
 	
-	<button ng-click="getTok()">cookie Token</button>
+<!-- 	<button ng-click="login.getTok()">cookie Token</button>
 
-	<button ng-click="tokenTest()">Token test</button>
+	<button ng-click="login.tokenTest()">Token test</button>
 
-	<button ng-click="logout()">Logout</button>
+	<button ng-click="login.logout()">Logout</button> -->
 
 </div>

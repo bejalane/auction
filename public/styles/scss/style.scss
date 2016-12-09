@@ -1,0 +1,221 @@
+$bg-color-main: #000;
+$font-color-main: #fff;
+
+@mixin call-btn-color(){
+	background: rgba(55,73,148,1);
+background: -moz-linear-gradient(left, rgba(55,73,148,1) 0%, rgba(89,100,171,1) 41%, rgba(91,131,201,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(55,73,148,1)), color-stop(41%, rgba(89,100,171,1)), color-stop(100%, rgba(91,131,201,1)));
+background: -webkit-linear-gradient(left, rgba(55,73,148,1) 0%, rgba(89,100,171,1) 41%, rgba(91,131,201,1) 100%);
+background: -o-linear-gradient(left, rgba(55,73,148,1) 0%, rgba(89,100,171,1) 41%, rgba(91,131,201,1) 100%);
+background: -ms-linear-gradient(left, rgba(55,73,148,1) 0%, rgba(89,100,171,1) 41%, rgba(91,131,201,1) 100%);
+background: linear-gradient(to right, rgba(55,73,148,1) 0%, rgba(89,100,171,1) 41%, rgba(91,131,201,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#374994', endColorstr='#5b83c9', GradientType=1 );
+}
+
+@mixin centered-element() {
+	position: absolute;
+    top:50%;
+    left:50%;
+    -ms-transform:translate(-50%, -50%);
+    -webkit-transform:translate(-50%, -50%);
+    -moz-transform:translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}  
+}
+
+@mixin input-focus {
+  &:active {outline: none; border: none;}
+  &:focus {outline: none; border: none;}
+}
+
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.main-wrapper {
+	background-color: $bg-color-main;
+	width: 100%;
+	height: 100vh;
+	padding: 50px;
+	box-sizing: border-box;
+}
+
+header {
+	padding-bottom: 85px;
+}
+
+.header-logo-wrapper {
+	text-align: center;
+}
+
+.header-logo {
+	display: inline-block;
+	font-size: 40px;
+	color: $font-color-main;
+	font-family: sans-serif;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	position: relative;
+	top: 40px;
+	font-weight: 100;
+}
+
+.nav-login-wrapper, .nav-seasons-wrapper {
+	color: $font-color-main;
+	float: left;
+	font-family: sans-serif;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	font-size: 10px;
+	position: relative;
+}
+
+.nav-seasons-wrapper {
+	float: right;
+}
+
+.nav-login-wrapper {
+	cursor: pointer;
+}
+
+.nav-login-menu {
+	position: relative;
+    width: auto;
+    border-left: 1px solid #fff;
+    left: 3px;
+    top: 5px;
+}
+
+.nav-login-menu ul {
+	list-style: none;
+}
+
+.nav-login-menu ul li {
+	padding: 10px;
+}
+
+.nav-login-menu ul li:hover {
+	color: #5B82C8;
+}
+
+.home-paintings-slider {
+	overflow: hidden;
+	position: relative;
+    width: 100%;
+}
+
+.home-pics-carousel {
+	width: auto;
+	padding-top: 30vh;
+	height: 150px;
+	position: relative;
+	left: 0;
+}
+
+.home-pics-carousel .item {
+	height: 150px;
+	float: left;
+	margin: 0 40px;
+
+}
+
+.home-pics-carousel .item img {
+	height: 100%;
+}
+
+
+/*PNT*/
+
+.pnt-pictures {
+	width: 70%;
+	float: left;
+}
+
+.pnt-picture-data {
+	width: 20%;
+	float: left;
+	color: #fff;
+}
+
+/*LOGIN*/
+.login-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0,0,0,0.95);
+}
+
+.login-container form {
+	max-width: 700px;
+	padding: 100px;
+	@include centered-element();
+}
+
+.login-container form h1 {
+	text-align: center;
+	color: #788080;
+}
+
+.login-container form input {
+	@include placeholder {
+	    color: #788080;
+	    letter-spacing: 1px;
+	}
+}
+
+.login-container form input,
+.login-container form button {
+	width: 100%;
+	background-color: rgba(255,255,255,0.1);
+	padding: 15px;
+	border: none;
+	color: #fff;
+	margin: 20px 0;
+	letter-spacing: 1px;
+	@include input-focus;
+}
+
+.login-container form button {
+	background-color: rgba(255,255,255,0.1);
+}
+
+
+.login-container form button {
+	@include call-btn-color();
+}
+
+.login-container-registration {
+	color: #fff;
+	letter-spacing: 1px;
+}
+
+.login-container-registration span {
+	color: #5B82C8;
+	cursor: pointer;
+}
+
+.login-close {
+	color: #5B82C8;
+	font-size: 50px;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	cursor: pointer;
+}
+
+.login-user-created {
+	font-size: 21px;
+}

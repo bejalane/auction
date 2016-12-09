@@ -39,7 +39,7 @@
 		</div>
 	</div>
 </div> -->
-<div class="container-fluid">   
+<!-- <div class="container-fluid">   
 	<div class="dropdown">
 	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{home.currentSeason.name}}
 	  <span class="caret"></span></button>
@@ -48,13 +48,48 @@
 	  </ul>
 	</div>
 </div>
-
-<div class="container-fluid">
-	<div ng-repeat="pic in home.seasonPaintings">
+ -->
+<!-- <div class="container-fluid">
+	<div ng-repeat="pic in home.seasonPaintings" ng-click="home.openPainting($index)">
 		<div>name: {{pic.name}}</div>
 		<div>desc: {{pic.description}}</div>
-		<div ng-repeat="img in pic.pics">
-			<img ng-src="{{img.path}}"  alt="" width="200" ng-if="img.main" ng-click="home.openPainting($parent.$index)">
+		<div  >
+			<img ng-src="{{img.path}}" ng-repeat="img in pic.pics"  alt="" width="200" ng-if="img.main" >
 		</div>
 	</div>
 </div>
+ -->
+<div class="main-wrapper">
+	<header>
+		<div class="header-logo-wrapper">
+			<div class="header-logo">Auction</div>
+		</div>
+		<div class="nav-login-wrapper" ng-click="home.showLoginWindow()" ng-show="!home.user">Login</div>
+		<div class="nav-login-wrapper" ng-show="home.user" ng-mouseover="showUserMenu = true" ng-mouseleave="showUserMenu = false">
+			<span>{{home.user.name}}</span>
+			<div class="nav-login-menu" ng-show="showUserMenu">
+				<ul>
+					<li>My Account</li>
+					<li ng-click="home.logout()">Logout</li>
+				</ul>
+			</div>
+		</div>
+		<div class="nav-seasons-wrapper">
+			<div class="dropdown">
+			  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{home.currentSeason.name}}
+			  <span class="caret"></span></button>
+			  <ul class="dropdown-menu">
+			    <li ng-repeat="season in home.seasons"><a ng-click="home.changeSeason(season);">{{season.name}}</a></li>
+			  </ul>
+			</div>
+		</div>
+	</header>
+
+	<div class="home-paintings-slider">
+		<div class="home-pics-carousel">
+			<div class="item" ng-repeat="pic in home.seasonPaintings" ng-click="home.openPainting($index)"><img ng-src="{{img.path}}" ng-repeat="img in pic.pics" ng-if="img.main" ></div>
+		</div>
+	</div>
+</div>
+
+<login ng-show="home.showLogin" class="login-modal"></login>

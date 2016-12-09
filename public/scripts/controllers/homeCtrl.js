@@ -1,11 +1,14 @@
-app.controller('homeCtrl', function($scope, dataSvc, $location) {
+app.controller('homeCtrl', function($scope, $rootScope, rootSvc, dataSvc, $location, userSvc, loginSvc, localStorageService) {
 
     var home = this;
+
+    home.user = false;
 
     function init(){
         dataSvc.getCatalogues().then(
             function(res){
                 home.seasons = res.data;
+                checkLoggedIn();
                 home.detectCurrentSeason(home.seasons);
                 home.getPaintingsBySeason(home.currentSeason);
                 console.log(home.seasons);
@@ -15,6 +18,19 @@ app.controller('homeCtrl', function($scope, dataSvc, $location) {
             }
         )
     }
+
+    function checkLoggedIn(){
+        if(userSvc.getUserData('name')){
+            home.user = userSvc.getUserData();
+            console.log(userSvc.getUserData('name'));
+        } else {
+            home.user = false;
+        }
+    }
+
+    $rootScope.$on("loggedIn", function(){
+       checkLoggedIn();
+    });
 
     home.getPaintingsBySeason = function(season){
         dataSvc.getPaintingsBySeason(season._id).then(
@@ -36,7 +52,7 @@ app.controller('homeCtrl', function($scope, dataSvc, $location) {
         for (var i = 0; i < data.length; i++) {
             for (var n = 0; n < data[i].pics.length; n++) {
                 data[i].pics[n].path = data[i].pics[n].path.replace("public/", "");
-                console.log(data[i].pics[n].path);
+                //console.log(data[i].pics[n].path);
             }
         }
     }
@@ -62,6 +78,25 @@ app.controller('homeCtrl', function($scope, dataSvc, $location) {
     home.openPainting = function(index){
         console.log(index);
         $location.path('/painting/' + home.seasonPaintings[index].name + '/' + home.seasonPaintings[index]._id );
+    }
+
+
+
+    home.showLoginWindow = function(){
+        home.showLogin = true;
+        $('login').show();
+    }
+
+    home.logout = function(){
+        loginSvc.logout().then(
+            function(res){
+                console.log(res);
+                checkLoggedIn();
+            },
+            function(err){
+                console.log(err);
+            }
+        );
     }
 
 

@@ -1,4 +1,4 @@
-app.controller('backofficeLoginCtrl', ['$scope', '$rootScope', '$location', '$cookies', 'backofficeLoginSvc', function($scope, $rootScope, $location, $cookies, backofficeLoginSvc) {
+app.controller('backofficeLoginCtrl', ['$scope', '$rootScope', '$location', '$cookies', 'backofficeLoginSvc', 'localStorageService', function($scope, $rootScope, $location, $cookies, backofficeLoginSvc, localStorageService) {
     
     $rootScope.loggedInAsAdmin = false;
 
@@ -13,7 +13,7 @@ app.controller('backofficeLoginCtrl', ['$scope', '$rootScope', '$location', '$co
         	function(response){
         		if(response.success){
         			console.log(response);
-        			$cookies.put('token', response.token);
+                    localStorageService.set("token", JSON.stringify(response.token));
 
                     var expireDate = new Date();
                     expireDate.setDate(expireDate.getMinutes() + 100);
@@ -31,7 +31,7 @@ app.controller('backofficeLoginCtrl', ['$scope', '$rootScope', '$location', '$co
     }
 
     $scope.getTok = function(){
-    	var token = $cookies.get('token');
+    	var token = localStorageService.get('token');
     	console.log(token);
     }
 
@@ -54,7 +54,7 @@ app.controller('backofficeLoginCtrl', ['$scope', '$rootScope', '$location', '$co
             function(res){
                 console.log(res);
                 if(res.innerCode === 0){
-                    $cookies.remove('token');
+                    localStorageService.remove('token');
                     $cookies.remove('loggedInAsAdmin');
                 }
             },

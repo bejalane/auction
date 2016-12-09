@@ -1,4 +1,4 @@
-app.service('httpBOSvc', ['$http', 'apiSvc', '$q', '$cookies', function($http, apiSvc, $q, $cookies) {
+app.service('httpBOSvc', ['$http', 'apiSvc', '$q', 'localStorageService', function($http, apiSvc, $q, localStorageService) {
     
     //GET
 	this.get = function(url){
@@ -7,7 +7,7 @@ app.service('httpBOSvc', ['$http', 'apiSvc', '$q', '$cookies', function($http, a
 		$http({
 		    method: 'GET',
 		    url: apiSvc.backofficeEnvironment + apiSvc.backofficeRoutes[url],
-		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': $cookies.get('token') },
+		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': localStorageService.get("token") },
 		})
 		.success(function (response) {
 		   	defer.resolve(response);
@@ -27,7 +27,7 @@ app.service('httpBOSvc', ['$http', 'apiSvc', '$q', '$cookies', function($http, a
 		    method: 'POST',
 		    data: data,
 		    url: apiSvc.backofficeEnvironment + apiSvc.backofficeRoutes[url],
-		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': $cookies.get('token') },
+		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': localStorageService.get("token") },
 		})
 		.success(function (response) {
 		   	defer.resolve(response);

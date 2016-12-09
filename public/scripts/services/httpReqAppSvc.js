@@ -1,4 +1,4 @@
-app.service('httpReqAppSvc', ['$http', 'apiSvc', '$q', '$cookies', function($http, apiSvc, $q, $cookies) {
+app.service('httpReqAppSvc', ['$http', 'apiSvc', '$q', 'localStorageService', function($http, apiSvc, $q, localStorageService) {
     
     //GET
 	this.get = function(url, params){
@@ -12,7 +12,7 @@ app.service('httpReqAppSvc', ['$http', 'apiSvc', '$q', '$cookies', function($htt
 		$http({
 		    method: 'GET',
 		    url: url,
-		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': $cookies.get('token') },
+		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': JSON.parse(localStorageService.get('token')) },
 		})
 		.success(function (response) {
 		   	defer.resolve(response);
@@ -32,7 +32,7 @@ app.service('httpReqAppSvc', ['$http', 'apiSvc', '$q', '$cookies', function($htt
 		    method: 'POST',
 		    data: data,
 		    url: apiSvc.environment + apiSvc.url[url],
-		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': $cookies.get('token') },
+		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': JSON.parse(localStorageService.get('token')) },
 		})
 		.success(function (response) {
 		   	defer.resolve(response);

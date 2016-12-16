@@ -2,11 +2,11 @@
 	<div>Name: {{pntg.pic.name}}</div>
 	<div>Description: {{pntg.pic.description}}</div>
 	<div>Current Price: <strong>{{pntg.price.currentPrice}}</strong></div>
-	<div>Start Price: {{pntg.price.startPrice}}</div>
-	<div>Reserve Price: {{pntg.reservePrice}}</div>
-	<div>Make a bid: <input type="number" ng-model="pntg.newBid"><button ng-click="pntg.setNewBid(pntg.newBid)">set</button></div>
-	<div>Leader: {{pntg.price.leader}}</div>
-	<div>Previous: {{pntg.price.previous}}</div>
+	<div>Reserve Price: <span ng-show="pntg.price.reservePriceMet">met</span> <span ng-show="!pntg.price.reservePriceMet">not met</span></div>
+	<div>Make a bid: <input type="number" ng-model="pntg.newBid"><button ng-disabled="!pntg.newBid" ng-click="pntg.setNewBid(pntg.newBid)">set</button></div>
+	<small>next min bid: {{pntg.price.nextMinBid}}</small>
+	<div>Leader: <span ng-show="pntg.price.leader">{{pntg.price.leader}}</span> <span ng-show="!pntg.price.leader"> you can be first!</span></div>
+	<div ng-show="pntg.price.previous">Previous: {{pntg.price.previous}}</div>
 	<div ng-repeat="img in pntg.pic.pics">
 		<img ng-src="{{img.path}}"  alt="" width="200">
 	</div>

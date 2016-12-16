@@ -1,10 +1,18 @@
-<div class="container">
+<div class="container backoffice-dashboard-container">
 	<div class="row">
+	
+	<h4>Welcome to BO Dashboard!</h4>
 
-		<h4>Welcome to BO Dashboard!</h4>
+		<ul class="nav nav-tabs">
+		  <li ng-class="{'active' : showTabs === 'Catalogue'}" ng-click="showTab('Catalogue')"><a>Add new catalogue</a></li>
+		  <li ng-class="{'active' : showTabs === 'Painting'}" ng-click="showTab('Painting')"><a>Add new painting</a></li>
+		  <li ng-class="{'active' : showTabs === 'Bids'}" ng-click="showTab('Bids')"><a>Bids</a></li>
+		  <li><a>Menu 3</a></li>
+		</ul>
+
+		
 		<div class="col-lg-12">
-			<button class="btn btn-default" ng-click="showNewCatalogueForm = !showNewCatalogueForm">Add new catalogue</button>
-			<div ng-show="showNewCatalogueForm">
+			<div ng-show="showTabs === 'Catalogue'">
 				<form name="AddNewCatalogue">
 					<div class="form-group">
 					  <label for="newCatName">New Catalogue Name:</label>
@@ -20,8 +28,7 @@
 		</div>
 
 		<div class="col-lg-12">
-			<button class="btn btn-default" ng-click="showNewPaintingForm = !showNewPaintingForm">Add new painting</button>
-			<div ng-show="showNewPaintingForm">
+			<div ng-show="showTabs === 'Painting'">
 				<form name="AddNewPainting">
 					<div class="form-group">
 						<input type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" name="paintings" multiple />
@@ -62,6 +69,28 @@
 					</div>
 					<button class="btn btn-success" ng-click="addNewPainting();">Submit</button>
 				</form>
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+			<div ng-show="showTabs === 'Bids'">
+				<input type="text" class="form-control pull-left" ng-model="bids.paintingId" placeholder="Painting Id"><button class="btn btn-default" ng-click="getAllBids(bids.paintingId)">Get Bids</button>
+				<div class="divTable">
+					<div class="divTableBody">
+						<div class="divTableRow">
+							<div class="divTableCell">Bid</div>
+							<div class="divTableCell">Date</div>
+							<div class="divTableCell">User Name</div>
+							<div class="divTableCell">User Id</div>
+						</div>
+						<div class="divTableRow" ng-repeat="bid in bidsById">
+							<div class="divTableCell">{{bid.bid}}</div>
+							<div class="divTableCell">{{bid.date | date:'dd-MM-yyyy HH:mm:ss Z'}}</div>
+							<div class="divTableCell">{{bid.userName}}</div>
+							<div class="divTableCell">{{bid.userId}}</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 

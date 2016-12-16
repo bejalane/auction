@@ -1,5 +1,7 @@
-app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'backofficeDashboardSvc', 'localStorageService', function($scope, $location, $cookies, backofficeDashboardSvc, localStorageService) {
+app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'backofficeDashboardSvc', 'localStorageService', 'paintingSvc', function($scope, $location, $cookies, backofficeDashboardSvc, localStorageService, paintingSvc) {
     
+    $scope.showTabs = 'Catalogue';
+
     function checking(){
         backofficeDashboardSvc.checkLoggedIn().then(
             function(response){
@@ -29,6 +31,10 @@ app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'b
                 console.log(response);
             }
         );
+    }
+
+    $scope.showTab = function(val){
+        $scope.showTabs = val;
     }
 
     $scope.addNewCatalogue = function(){
@@ -160,7 +166,18 @@ app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'b
         
     }
 
-    //Get All Catalogues
+    //Get All Bids
+    $scope.getAllBids = function(id){
+        paintingSvc.getBids(id).then(
+         function(res){
+             console.log(res);
+             $scope.bidsById = res.data;
+         },
+         function(err){
+             console.log(err);
+         }
+        );
+    }
 
 
     

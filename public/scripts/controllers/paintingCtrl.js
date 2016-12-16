@@ -49,8 +49,8 @@ app.controller('paintingCtrl', function($scope, $rootScope, $route, $routeParams
 	mySocket.on('lastprice', function(res){
 		console.log('NEW PRICE!');
 		console.log(res);
-		pntg.price = res.data[0];
-		pntg.reservePrice = (pntg.price.currentPrice >= pntg.price.reservePrice) ? 'met' : 'not met';
+		pntg.newBid = null;
+		pntg.price = res.data;
 	});
 
 
@@ -68,7 +68,6 @@ app.controller('paintingCtrl', function($scope, $rootScope, $route, $routeParams
 				filterSrcForImg(res.data.painting);
 				pntg.pic = res.data.painting;
 				pntg.price = res.data.price;
-				pntg.reservePrice = (pntg.price.currentPrice >= pntg.price.reservePrice) ? 'met' : 'not met';
 			}
 		},
 		function(err){
@@ -90,7 +89,7 @@ app.controller('paintingCtrl', function($scope, $rootScope, $route, $routeParams
 	// );
 
 	pntg.setNewBid = function(newBid){
-		console.log(pntg.currentPrice);
+
 		// if(!pntg.currentPrice){
 		// 	return;
 		// }
@@ -114,6 +113,8 @@ app.controller('paintingCtrl', function($scope, $rootScope, $route, $routeParams
 				if(res.innerCode === 401){
 					pntg.showLogin = true;
 				}
+				console.log(pntg.newBid);
+				
 				console.log(res);
 			},
 			function(err){

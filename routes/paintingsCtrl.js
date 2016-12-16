@@ -1,6 +1,7 @@
 //Authenticate the user and get a JWT
 var express  = require('express');
 var router   = express.Router();
+var mongoose  = require('mongoose');
 var tools = require('../tools/tools');
 var Paintings = require('../app/models/paintingsModel');
 var Price = require('../app/models/price');
@@ -72,7 +73,34 @@ router.get('/getPaintingsBySeason/:id', function(req, res){
     });
 });
 
+router.get('/getSeasonPaintingsPrices/:id', function(req, res){
+	Paintings.find({'season': req.params.id}, function (err, docs) {
+		if(err){
+			return res.json({success: false, code: 1000, message: 'Can not get catalogues from db'});
+		}
 
+		var arrayOfIds = [];
+		for (var i = 0; i < docs.length; i++) {
+			arrayOfIds.push( new mongoose.Types.ObjectId( docs[i]._id ));
+		}
+
+		Price.find({'paintingId': { $in: arrayOfIds } }, function(err, pricesDocs){
+		     var pricesBySeason = [];
+		     for (var i = 0; i < pricesDocs.length; i++) {
+		     	var newPriceObj = {};
+		     	newPriceObj.id = pricesDocs[i]._id;
+		     	newPriceObj.paintingId = pricesDocs[i].paintingId;
+		     	newPriceObj.currentPrice = pricesDocs[i].currentPrice;
+		     	newPriceObj.leader = pricesDocs[i].leader;
+		     	newPriceObj.reservePriceMet = (pricesDocs[i].reservePrice > pricesDocs[i].currentPrice) ? false : true;
+
+		     	pricesBySeason.push(newPriceObj);
+		     }
+		     res.json({success: true, code: 0, data: pricesBySeason});
+		});
+        
+    });
+});
 
 
 
@@ -101,7 +129,8 @@ router.get('/getSinglePainting/:id', function(req, res){
 	    responseObj.price.currentPrice = results.price[0].currentPrice;
 	    responseObj.price.leader = results.price[0].leader;
 	    responseObj.price.previous = results.price[0].previous;
-	    responseObj.price.startPrice = results.price[0].startPrice;
+	    responseObj.price.reservePriceMet = (results.price[0].reservePrice > results.price[0].currentPrice) ? false : true;
+	    responseObj.price.nextMinBid = results.price[0].currentPrice + auctionSteps(results.price[0].currentPrice + 5);
 	    res.json({success: true, code: 0, data: responseObj});
 	});
 });
@@ -154,7 +183,7 @@ router.post('/setBid', tools.jwtAuth, function(req, res){
 				// var newLeader = {};
 				// var newPrevious = {};
 				var updatePrice = {};
-				if(req.body.bid > priceDocs[0].currentPrice){
+				if(req.body.bid >= priceDocs[0].currentPrice + auctionSteps(priceDocs[0].maxBidPrice)){
 			        if(priceDocs[0].maxBidPrice){
 			        	if(req.body.bid > priceDocs[0].maxBidPrice) {
 			        		console.log('1st case');
@@ -196,11 +225,11 @@ router.post('/setBid', tools.jwtAuth, function(req, res){
 			        		updatePrice.leaderId = req.body.userId;
 
 			        	} else {
-			        		return res.json({success: false, code: 601, message: 'Your bid is less then start price'});
+			        		return res.json({success: false, code: 601, message: 'Your bid is less then current price'});
 			        	}
 			        }
 			    } else {
-			    	return res.json({success: false, code: 601, message: 'Your bid is less then start price'});
+			    	return res.json({success: false, code: 601, message: 'Your bid is less then current price'});
 			    }
 
 
@@ -216,11 +245,14 @@ router.post('/setBid', tools.jwtAuth, function(req, res){
 						}
 						console.log('fetching bids after set new');
 						var priceObj = {};
-						priceObj.currentPrice = lastPriceDocs.currentPrice;
-						priceObj.leader = lastPriceDocs.leader;
-						priceObj.previous = lastPriceDocs.previous;
-						priceObj.startPrice = lastPriceDocs.startPrice;
-			    		io.sockets.emit('lastprice', {success: true, code: 0, data: lastPriceDocs});
+						priceObj.currentPrice = lastPriceDocs[0].currentPrice;
+						priceObj.leader = lastPriceDocs[0].leader;
+						priceObj.previous = lastPriceDocs[0].previous;
+						priceObj.startPrice = lastPriceDocs[0].startPrice;
+						priceObj.nextMinBid = lastPriceDocs[0].currentPrice + auctionSteps(lastPriceDocs[0].currentPrice + 5);
+						priceObj.maxBidPrice = lastPriceDocs[0].maxBidPrice;
+						priceObj.maxSecondBidPrice = lastPriceDocs[0].maxSecondBidPrice;
+			    		io.sockets.emit('lastprice', {success: true, code: 0, data: priceObj});
 					});
 					
 				});

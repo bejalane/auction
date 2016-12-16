@@ -1,8 +1,9 @@
-app.controller('homeCtrl', function($scope, $rootScope, rootSvc, dataSvc, $location, userSvc, loginSvc, localStorageService) {
+app.controller('homeCtrl', function($scope, $rootScope, rootSvc, dataSvc, $location, userSvc, loginSvc, localStorageService, paintingSvc) {
 
     var home = this;
 
     home.user = false;
+    home.hovered = {};
 
     function init(){
         dataSvc.getCatalogues().then(
@@ -13,12 +14,31 @@ app.controller('homeCtrl', function($scope, $rootScope, rootSvc, dataSvc, $locat
                 home.getPaintingsBySeason(home.currentSeason);
                 console.log(home.seasons);
 
+                console.log(home.currentSeason._id)
+
+
             }, 
             function(err){
                 console.log(err);
             }
         )
     }
+
+    function loadSeasonsPrices(){
+        paintingSvc.getSeasonPaintingsPrices(home.currentSeason._id).then(
+            function(res){
+                console.log(res);
+                if(res.code === 0){
+                    home.paintingsPrices = res.data;
+                }
+            },
+            function(err){
+                console.log(err);
+            }
+        );
+    }
+
+
 
     function checkLoggedIn(){
         if(userSvc.getUserData('name')){
@@ -41,6 +61,7 @@ app.controller('homeCtrl', function($scope, $rootScope, rootSvc, dataSvc, $locat
                     home.seasonPaintings = res.data;
                     filterSrcForImg(res.data);
                     setTimeout(GLOBAL_jqueryCustom, 1000);
+                    loadSeasonsPrices();
                 }
             },
             function(err){
@@ -75,6 +96,8 @@ app.controller('homeCtrl', function($scope, $rootScope, rootSvc, dataSvc, $locat
     home.changeSeason = function(season){
         home.currentSeason = season;
         home.getPaintingsBySeason(home.currentSeason);
+
+        loadSeasonsPrices();
     }
 
     home.openPainting = function(index){
@@ -99,6 +122,19 @@ app.controller('homeCtrl', function($scope, $rootScope, rootSvc, dataSvc, $locat
                 console.log(err);
             }
         );
+    }
+
+    home.hoverPainting = function(id, name){
+        for (var i = 0; i < home.paintingsPrices.length; i++) {
+            if(id === home.paintingsPrices[i].paintingId){
+                home.hovered = {};
+                home.hovered.name = name;
+                home.hovered.price = home.paintingsPrices[i].currentPrice;
+                home.hovered.reservePrice = (home.paintingsPrices[i].reservePriceMet) ? 'met' : 'not met';
+                home.hovered.leader = home.paintingsPrices[i].leader;
+                break;
+            }
+        }
     }
 
 

@@ -14,4 +14,9 @@ app.service('paintingSvc', function(httpReqAppSvc) {
 		return httpReqAppSvc.post(data, 'setBid');
 	}
 
+	this.getSeasonPaintingsPrices = function(data){
+		var params = '/' + data;
+		return httpReqAppSvc.get('getSeasonPrices', params);
+	}
+
 });

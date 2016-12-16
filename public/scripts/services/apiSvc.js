@@ -13,7 +13,8 @@ app.service('apiSvc', function() {
 		getPaintingsBySeason: 'paintings/getPaintingsBySeason',
 		getPainting: 'paintings/getSinglePainting',
 		getBids: 'paintings/getBids',
-		setBid: 'paintings/setBid'
+		setBid: 'paintings/setBid',
+		getSeasonPrices: 'paintings/getSeasonPaintingsPrices'
 	}
 
 	this.backofficeRoutes = {

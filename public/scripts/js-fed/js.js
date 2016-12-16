@@ -11,59 +11,69 @@ function detectPicturesWidth(){
         var itemWidth = $(items[i]).width() + parseInt($(items[i]).css('margin-left')) + parseInt($(items[i]).css('margin-right'));
         generalWidth = generalWidth + itemWidth;
     }
-    $('.home-pics-carousel').width(generalWidth+10);
+    $('.home-pics-carousel').width(generalWidth+70);
+
+    if($(window).width() < $('.home-pics-carousel').width()){
+        movefunctions();
+    }
 }
 detectPicturesWidth();
 
+function movefunctions(){
 $('.home-pics-carousel').mousemove(function(e){ 
-    var xLine = $(window).width()-100;
-    var galleryLine = $('.home-pics-carousel').width();
-    var conversionMove = (galleryLine-xLine-100)/(xLine-50);
-    // console.log(xLine);
-    // console.log(galleryLine);
-    // console.log(conversionMove);
-    // console.log(e.pageX)
-    if((oldx - e.pageX) > 100 || (oldx - e.pageX) < -100) {
-        $('.home-pics-carousel').animate({left: -(e.pageX-50)*conversionMove}, 150);
-        oldx = e.pageX;
-    } else {
-        $('.home-pics-carousel').animate({left: -(e.pageX-50)*conversionMove}, 10);
-        oldx = e.pageX;
+    if($(window).width() < $('.home-pics-carousel').width()){
+        var xLine = $(window).width()-100;
+        var galleryLine = $('.home-pics-carousel').width();
+        var conversionMove = (galleryLine-xLine-100)/(xLine-50);
+        // console.log(xLine);
+        // console.log(galleryLine);
+        // console.log(conversionMove);
+        // console.log(e.pageX)
+        if((oldx - e.pageX) > 100 || (oldx - e.pageX) < -100) {
+            $('.home-pics-carousel').animate({left: -(e.pageX-50)*conversionMove}, 150);
+            oldx = e.pageX;
+        } else {
+            $('.home-pics-carousel').animate({left: -(e.pageX-50)*conversionMove}, 10);
+            oldx = e.pageX;
+        }
     }
 }); 
 
 
 function move(){
-    var direction = "";
-    var xLine = $(window).width();
-    var galleryLine = $('.home-pics-carousel').width();
-    var conversionMove = galleryLine/xLine;
-    var xCenter = xLine/2;
+    if($(window).width() < $('.home-pics-carousel').width()){
+        var direction = "";
+        var xLine = $(window).width();
+        var galleryLine = $('.home-pics-carousel').width();
+        var conversionMove = galleryLine/xLine;
+        var xCenter = xLine/2;
 
-    mousemovemethod = function (e) {
- 
-        if (e.pageX < oldx) {
-            direction = 0;
-        } else if (e.pageX > oldx) {
-            direction = 1;
+        mousemovemethod = function (e) {
+        if($('.home-pics-carousel').width() > 0){
+            if (e.pageX < oldx) {
+                direction = 0;
+            } else if (e.pageX > oldx) {
+                direction = 1;
+            }
+         
+           // console.log(direction);
+        
+           if(!direction){
+               $('.home-pics-carousel').animate({left: -e.pageX*conversionMove+80-xLine}, 2);
+            } else {
+               $('.home-pics-carousel').animate({left: -e.pageX*conversionMove+80+xLine}, 2);
+            }
+         
+            oldx = e.pageX;
+        }
         }
      
-       // console.log(direction);
-    
-       if(!direction){
-           $('.home-pics-carousel').animate({left: -e.pageX*conversionMove+80-xLine}, 2);
-        } else {
-           $('.home-pics-carousel').animate({left: -e.pageX*conversionMove+80+xLine}, 2);
-        }
-     
-        oldx = e.pageX;
-     
-}
+    }
 
  document.addEventListener('mousemove', mousemovemethod);
 
  }
-
+}
 });
 
 }

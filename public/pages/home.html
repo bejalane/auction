@@ -1,64 +1,3 @@
-<!-- <div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-12">
-			<h2 class="text-center">Season Summer 2016</h2>
-		</div>
-	</div>
-</div>
- -->
-<!-- <div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="items-wrapper">
-        		<ul class="text-center">
-        			<li ng-repeat="pic in allproducts"><img ng-click="navToSlide($index)" src="{{pic.url}}" alt="{{pic.name}}"></li>
-        		</ul>
-        	</div>
-		</div>
-	</div>
-</div>
-
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-6">
-			<div class="slide">
-	        	<div ng-click="navSlide('prev')">prev</div>
-	        	<div ng-click="navSlide('next')">next</div>
-	        	<div class="slide-wrapper"><img ng-click="navSlide('next')" src="{{allproducts[currentSlide].url}}" alt="allproducts[currentSlide].name"></div>
-	        	<h1>{{allproducts[currentSlide].name}}</h1>
-	        	<div>{{allproducts[currentSlide].description}}</div>
-        	</div>
-		</div>
-		<div class="col-sm-6">
-			<div>Current price: <strong>{{allproducts[currentSlide].currentPrice}}</strong> <strong>{{allproducts[currentSlide].currency}}</strong></div>
-			<div>Make a bid <input style="width:75px;" ng-model="addbid" type="number"><button ng-click="addBid(addbid, currentSlide)">add</button></div>
-			<div>Reserve price is <strong>{{allproducts[currentSlide].reservePriceReach}}</strong></div>
-			<div ng-if="allproducts[currentSlide].bids !== 0">Leader is {{allproducts[currentSlide].leader}}</div>
-			<div ng-show="allproducts[currentSlide].bids !== 0">Bids {{allproducts[currentSlide].bids}}</div>
-			<div ng-show="allproducts[currentSlide].bids === 0">There were no bids. Be first!</div>
-		</div>
-	</div>
-</div> -->
-<!-- <div class="container-fluid">   
-	<div class="dropdown">
-	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{home.currentSeason.name}}
-	  <span class="caret"></span></button>
-	  <ul class="dropdown-menu">
-	    <li ng-repeat="season in home.seasons"><a ng-click="home.changeSeason(season);">{{season.name}}</a></li>
-	  </ul>
-	</div>
-</div>
- -->
-<!-- <div class="container-fluid">
-	<div ng-repeat="pic in home.seasonPaintings" ng-click="home.openPainting($index)">
-		<div>name: {{pic.name}}</div>
-		<div>desc: {{pic.description}}</div>
-		<div  >
-			<img ng-src="{{img.path}}" ng-repeat="img in pic.pics"  alt="" width="200" ng-if="img.main" >
-		</div>
-	</div>
-</div>
- -->
 <div class="main-wrapper">
 	<header>
 		<div class="header-logo-wrapper">
@@ -88,13 +27,13 @@
 	<div class="home-paintings-details">
 		<div class="home-paintings-details-name">{{home.hovered.name}}</div>
 		<div class="home-paintings-details-current-price">$ {{home.hovered.price}}</div>
-		<div class="home-paintings-details-reserve">Reserve Price: {{home.hovered.reservePrice}}</div>
-		<div class="home-paintings-details-leader">Leader: {{home.hovered.leader}}</div>
+		<div class="home-paintings-details-reserve">Reserve price {{home.hovered.reservePrice}}</div>
+		<div class="home-paintings-details-leader">Leader: <span ng-show="home.hovered.leader">{{home.hovered.leader}}</span> <span ng-show="!home.hovered.leader">You can be first</span></div>
 	</div>
 
 	<div class="home-paintings-slider">
 		<div class="home-pics-carousel">
-			<div class="item" ng-repeat="pic in home.seasonPaintings" ng-click="home.openPainting($index)"><img ng-src="{{img.path}}" ng-repeat="img in pic.pics" ng-if="img.main" ></div>
+			<div class="item" ng-repeat="pic in home.seasonPaintings" ng-click="home.openPainting($index)" ng-mouseover="home.hoverPainting(pic._id, pic.name)"><img ng-src="{{img.path}}" ng-repeat="img in pic.pics" ng-if="img.main"></div>
 		</div>
 	</div>
 </div>

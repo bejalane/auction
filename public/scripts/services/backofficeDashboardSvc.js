@@ -1,4 +1,4 @@
-app.service('backofficeDashboardSvc', ['$http', 'apiSvc', '$q', '$cookies', 'httpBOSvc', function($http, apiSvc, $q, $cookies, httpBOSvc) {
+app.service('backofficeDashboardSvc', ['$http', 'apiSvc', '$q', '$cookies', 'httpBOSvc', 'localStorageService', function($http, apiSvc, $q, $cookies, httpBOSvc, localStorageService) {
     
     //Check if User Logged In
 	this.checkLoggedIn = function(){
@@ -28,7 +28,7 @@ app.service('backofficeDashboardSvc', ['$http', 'apiSvc', '$q', '$cookies', 'htt
 		    method: 'POST',
 		    data: data,
 		    url: apiSvc.backofficeEnvironment + apiSvc.backofficeRoutes.addNewPainting,
-		    headers: { 'Content-Type': undefined, 'Authorization': $cookies.get('token') },
+		    headers: { 'Content-Type': undefined, 'Authorization': JSON.parse(localStorageService.get('token')) },
 		})
 		.success(function (response) {
 		   	defer.resolve(response);

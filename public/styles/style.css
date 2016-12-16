@@ -64,7 +64,7 @@ header {
 
 .home-pics-carousel {
   width: auto;
-  padding-top: 30vh;
+  padding-top: 20vh;
   height: 150px;
   position: relative;
   left: 0; }
@@ -76,6 +76,10 @@ header {
 
 .home-pics-carousel .item img {
   height: 100%; }
+
+.home-paintings-details {
+  text-align: center;
+  color: #6b6b6b; }
 
 /*PNT*/
 .pnt-pictures {

@@ -85,6 +85,13 @@
 		</div>
 	</header>
 
+	<div class="home-paintings-details">
+		<div class="home-paintings-details-name">{{home.hovered.name}}</div>
+		<div class="home-paintings-details-current-price">$ {{home.hovered.price}}</div>
+		<div class="home-paintings-details-reserve">Reserve Price: {{home.hovered.reservePrice}}</div>
+		<div class="home-paintings-details-leader">Leader: {{home.hovered.leader}}</div>
+	</div>
+
 	<div class="home-paintings-slider">
 		<div class="home-pics-carousel">
 			<div class="item" ng-repeat="pic in home.seasonPaintings" ng-click="home.openPainting($index)"><img ng-src="{{img.path}}" ng-repeat="img in pic.pics" ng-if="img.main" ></div>

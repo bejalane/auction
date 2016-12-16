@@ -1,6 +1,8 @@
 var oldx = 0;
+function GLOBAL_jqueryCustom(){
 $( document ).ready(function() {
 
+console.log('HI');
 
 function detectPicturesWidth(){
     var items = $('.home-pics-carousel').children('.item');
@@ -9,7 +11,7 @@ function detectPicturesWidth(){
         var itemWidth = $(items[i]).width() + parseInt($(items[i]).css('margin-left')) + parseInt($(items[i]).css('margin-right'));
         generalWidth = generalWidth + itemWidth;
     }
-    $('.home-pics-carousel').width(generalWidth);
+    $('.home-pics-carousel').width(generalWidth+10);
 }
 detectPicturesWidth();
 
@@ -17,10 +19,10 @@ $('.home-pics-carousel').mousemove(function(e){
     var xLine = $(window).width()-100;
     var galleryLine = $('.home-pics-carousel').width();
     var conversionMove = (galleryLine-xLine-100)/(xLine-50);
-    console.log(xLine);
-    console.log(galleryLine);
-    console.log(conversionMove);
-    console.log(e.pageX)
+    // console.log(xLine);
+    // console.log(galleryLine);
+    // console.log(conversionMove);
+    // console.log(e.pageX)
     if((oldx - e.pageX) > 100 || (oldx - e.pageX) < -100) {
         $('.home-pics-carousel').animate({left: -(e.pageX-50)*conversionMove}, 150);
         oldx = e.pageX;
@@ -46,7 +48,7 @@ function move(){
             direction = 1;
         }
      
-       console.log(direction);
+       // console.log(direction);
     
        if(!direction){
            $('.home-pics-carousel').animate({left: -e.pageX*conversionMove+80-xLine}, 2);
@@ -61,15 +63,7 @@ function move(){
  document.addEventListener('mousemove', mousemovemethod);
 
  }
- //move();
-
-// $('.home-paintings-slider').hover(
-//     function(){
-//         console.log('HOVER');
-//     }, 
-//     function(){
-//         console.log('HOVER OFF');
-//     }
-// )
 
 });
+
+}

@@ -18,6 +18,30 @@ var PriceSchema = new mongoose.Schema({
 	reservePrice: {
 		type: Number,
 		required: true
+	},
+	maxBidPrice: {
+		type: Number,
+		required: false
+	},
+	maxSecondBidPrice: {
+		type: Number,
+		required: false
+	},
+	leader: {
+		type: String,
+		required: false
+	},
+	leaderId: {
+		type: String,
+		required: false
+	},
+	previous: {
+		type: String,
+		required: false
+	},
+	previousId: {
+		type: String,
+		required: false
 	}
 });
 

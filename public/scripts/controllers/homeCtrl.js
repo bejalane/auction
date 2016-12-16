@@ -12,6 +12,7 @@ app.controller('homeCtrl', function($scope, $rootScope, rootSvc, dataSvc, $locat
                 home.detectCurrentSeason(home.seasons);
                 home.getPaintingsBySeason(home.currentSeason);
                 console.log(home.seasons);
+
             }, 
             function(err){
                 console.log(err);
@@ -39,6 +40,7 @@ app.controller('homeCtrl', function($scope, $rootScope, rootSvc, dataSvc, $locat
                 if(res.code === 0){
                     home.seasonPaintings = res.data;
                     filterSrcForImg(res.data);
+                    setTimeout(GLOBAL_jqueryCustom, 1000);
                 }
             },
             function(err){

@@ -50,6 +50,7 @@ router.post('/saveNewPaintings', tools.jwtAuthAdmin, function (req, res) {
   var newPrice = new Price ({
     paintingId: req.body.name,
     startPrice: startPrice,
+    currentPrice: startPrice,
     reservePrice: reservePrice
   });
   
@@ -61,6 +62,7 @@ router.post('/saveNewPaintings', tools.jwtAuthAdmin, function (req, res) {
     var newPrice = new Price ({
       paintingId: docsInserted._id,
       startPrice: startPrice,
+      currentPrice: startPrice,
       reservePrice: reservePrice
     });
 

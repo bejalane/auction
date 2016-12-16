@@ -7,7 +7,7 @@ app.service('httpBOSvc', ['$http', 'apiSvc', '$q', 'localStorageService', functi
 		$http({
 		    method: 'GET',
 		    url: apiSvc.backofficeEnvironment + apiSvc.backofficeRoutes[url],
-		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': localStorageService.get("token") },
+		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': JSON.parse(localStorageService.get('token')) },
 		})
 		.success(function (response) {
 		   	defer.resolve(response);
@@ -27,7 +27,7 @@ app.service('httpBOSvc', ['$http', 'apiSvc', '$q', 'localStorageService', functi
 		    method: 'POST',
 		    data: data,
 		    url: apiSvc.backofficeEnvironment + apiSvc.backofficeRoutes[url],
-		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': localStorageService.get("token") },
+		    headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json', 'Authorization': JSON.parse(localStorageService.get('token')) },
 		})
 		.success(function (response) {
 		   	defer.resolve(response);

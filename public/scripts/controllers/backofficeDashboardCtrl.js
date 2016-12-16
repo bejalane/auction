@@ -1,5 +1,4 @@
-app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'backofficeDashboardSvc', 
-	function($scope, $location, $cookies, backofficeDashboardSvc) {
+app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'backofficeDashboardSvc', 'localStorageService', function($scope, $location, $cookies, backofficeDashboardSvc, localStorageService) {
     
     function checking(){
         backofficeDashboardSvc.checkLoggedIn().then(
@@ -69,7 +68,6 @@ app.controller('backofficeDashboardCtrl', ['$scope', '$location', '$cookies', 'b
 			            		newPicture.name = f.name;
 			            		newPicture.type = f.type;
 			            		newPicture.weight = f.size/1000000 + ' mb';
-                                console.log(i);
 			            		$scope.addPic(newPicture);
                         	}
 				        });

@@ -1,4 +1,4 @@
-app.service('backofficeLoginSvc', ['$http', 'apiSvc', '$q', '$cookies', function($http, apiSvc, $q, $cookies) {
+app.service('backofficeLoginSvc', ['$http', 'apiSvc', '$q', '$cookies', 'localStorageService', function($http, apiSvc, $q, $cookies, localStorageService) {
     
 	this.login = function(user){
 		var defer = $q.defer();
@@ -22,9 +22,9 @@ app.service('backofficeLoginSvc', ['$http', 'apiSvc', '$q', '$cookies', function
 		var defer = $q.defer();
 
 		$http({
-		    method: 'POST',
-		    url: apiSvc.backofficeEnvironment + apiSvc.backofficeRoutes.test,
-		    headers: { 'Content-Type': undefined ,'Accept': 'application/json', 'Authorization': $cookies.get('token') },
+		    method: 'GET',
+		    url: apiSvc.backofficeEnvironment + apiSvc.backofficeRoutes.checkLoggedIn,
+		    headers: { 'Content-Type': undefined ,'Accept': 'application/json', 'Authorization': JSON.parse(localStorageService.get('token')) },
 		})
 		.success(function (response) {
 		   	defer.resolve(response);
@@ -42,7 +42,7 @@ app.service('backofficeLoginSvc', ['$http', 'apiSvc', '$q', '$cookies', function
 		$http({
 		    method: 'POST',
 		    url: apiSvc.backofficeEnvironment + apiSvc.backofficeRoutes.logout,
-		    headers: { 'Content-Type': undefined ,'Accept': 'application/json', 'Authorization': $cookies.get('token') },
+		    headers: { 'Content-Type': undefined ,'Accept': 'application/json', 'Authorization': JSON.parse(localStorageService.get('token')) },
 		})
 		.success(function (response) {
 		   	defer.resolve(response);

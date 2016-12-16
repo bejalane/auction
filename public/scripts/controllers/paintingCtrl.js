@@ -11,39 +11,46 @@ app.controller('paintingCtrl', function($scope, $rootScope, $route, $routeParams
 
 	mySocket.emit('requestBids', {id: $routeParams.painting});
 
-	mySocket.on('bids', function(res){
-		console.log('All BIDS!');
-		if(res.data.length > 1){
-			pntg.currentPrice = res.data[res.data.length-1].bid;
-			pntg.leader = res.data[res.data.length-1].userName;
-			pntg.previous = res.data[res.data.length-2].userName;
-			pntg.newBid = angular.copy(pntg.currentPrice + 10);
-		} else if(res.data.length > 0){
-			pntg.currentPrice = res.data[res.data.length-1].bid;
-			pntg.leader = res.data[res.data.length-1].userName;
-			pntg.previous = null;
-			pntg.newBid = angular.copy(pntg.currentPrice + 10);
-		} else {
-			pntg.currentPrice = pntg.price.startPrice;
-			pntg.leader = 'you can be first';
-			pntg.previous = null;
-			pntg.newBid = angular.copy(pntg.currentPrice + 10);
-		}
-	});
+	// mySocket.on('bids', function(res){
+	// 	console.log('All BIDS!');
+	// 	if(res.data.length > 1){
+	// 		pntg.currentPrice = res.data[res.data.length-1].bid;
+	// 		pntg.leader = res.data[res.data.length-1].userName;
+	// 		pntg.previous = res.data[res.data.length-2].userName;
+	// 		pntg.newBid = angular.copy(pntg.currentPrice + 10);
+	// 	} else if(res.data.length > 0){
+	// 		pntg.currentPrice = res.data[res.data.length-1].bid;
+	// 		pntg.leader = res.data[res.data.length-1].userName;
+	// 		pntg.previous = null;
+	// 		pntg.newBid = angular.copy(pntg.currentPrice + 10);
+	// 	} else {
+	// 		pntg.currentPrice = pntg.price.startPrice;
+	// 		pntg.leader = 'you can be first';
+	// 		pntg.previous = null;
+	// 		pntg.newBid = angular.copy(pntg.currentPrice + 10);
+	// 	}
+	// });
 
-	mySocket.on('newbids', function(res){
-		console.log('NEW BID!');
-		if(res.data.length > 1){
-			pntg.currentPrice = res.data[res.data.length-1].bid;
-			pntg.leader = res.data[res.data.length-1].userName;
-			pntg.previous = res.data[res.data.length-2].userName;
-			pntg.newBid = angular.copy(pntg.currentPrice + 10);
-		} else {
-			pntg.currentPrice = res.data[res.data.length-1].bid;
-			pntg.leader = res.data[res.data.length-1].userName;
-			pntg.previous = null;
-			pntg.newBid = angular.copy(pntg.currentPrice + 10);
-		}
+	// mySocket.on('newbids', function(res){
+	// 	console.log('NEW BID!');
+	// 	if(res.data.length > 1){
+	// 		pntg.currentPrice = res.data[res.data.length-1].bid;
+	// 		pntg.leader = res.data[res.data.length-1].userName;
+	// 		pntg.previous = res.data[res.data.length-2].userName;
+	// 		pntg.newBid = angular.copy(pntg.currentPrice + 10);
+	// 	} else {
+	// 		pntg.currentPrice = res.data[res.data.length-1].bid;
+	// 		pntg.leader = res.data[res.data.length-1].userName;
+	// 		pntg.previous = null;
+	// 		pntg.newBid = angular.copy(pntg.currentPrice + 10);
+	// 	}
+	// });
+
+	mySocket.on('lastprice', function(res){
+		console.log('NEW PRICE!');
+		console.log(res);
+		pntg.price = res.data[0];
+		pntg.reservePrice = (pntg.price.currentPrice >= pntg.price.reservePrice) ? 'met' : 'not met';
 	});
 
 
@@ -61,6 +68,7 @@ app.controller('paintingCtrl', function($scope, $rootScope, $route, $routeParams
 				filterSrcForImg(res.data.painting);
 				pntg.pic = res.data.painting;
 				pntg.price = res.data.price;
+				pntg.reservePrice = (pntg.price.currentPrice >= pntg.price.reservePrice) ? 'met' : 'not met';
 			}
 		},
 		function(err){
@@ -83,13 +91,14 @@ app.controller('paintingCtrl', function($scope, $rootScope, $route, $routeParams
 
 	pntg.setNewBid = function(newBid){
 		console.log(pntg.currentPrice);
-		if(!pntg.currentPrice){
-			return;
-		}
+		// if(!pntg.currentPrice){
+		// 	return;
+		// }
 
-		if(pntg.currentPrice >= newBid){
-			return;
-		}
+		// if(pntg.currentPrice >= newBid){
+		// 	return;
+		// }
+		console.log(userSvc.getUserData("name"));
 
 		var bid = {};
 		bid.paintingId = $routeParams.painting;

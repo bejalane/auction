@@ -1,18 +1,51 @@
+<div class="main-wrapper">
+<header>
+	<div class="header-logo-wrapper">
+		<div class="header-logo">Auction</div>
+	</div>
+	<div class="nav-login-wrapper" ng-click="home.showLoginWindow()" ng-show="!home.user">Login</div>
+	<div class="nav-login-wrapper" ng-show="home.user" ng-mouseover="showUserMenu = true" ng-mouseleave="showUserMenu = false">
+		<span>{{home.user.name}}</span>
+		<div class="nav-login-menu" ng-show="showUserMenu">
+			<ul>
+				<li>My Account</li>
+				<li ng-click="home.logout()">Logout</li>
+			</ul>
+		</div>
+	</div>
+	<div class="nav-seasons-wrapper">
+		<div class="dropdown">
+		  <button class="btn btn-primary home-season-dd dropdown-toggle" type="button" data-toggle="dropdown">{{home.currentSeason.name}}
+		  <span class="caret"></span></button>
+		  <ul class="dropdown-menu">
+		    <li ng-repeat="season in home.seasons"><a ng-click="home.changeSeason(season);">{{season.name}}</a></li>
+		  </ul>
+		</div>
+	</div>
+</header>
+
 <div class="container-fluid">
-	<div>Name: {{pntg.pic.name}}</div>
-	<div>Description: {{pntg.pic.description}}</div>
-	<div>Current Price: <strong>{{pntg.price.currentPrice}}</strong></div>
-	<div>Reserve Price: <span ng-show="pntg.price.reservePriceMet">met</span> <span ng-show="!pntg.price.reservePriceMet">not met</span></div>
-	<div>Make a bid: <input type="number" ng-model="pntg.newBid"><button ng-disabled="!pntg.newBid" ng-click="pntg.setNewBid(pntg.newBid)">set</button></div>
-	<small>next min bid: {{pntg.price.nextMinBid}}</small>
-	<div>Leader: <span ng-show="pntg.price.leader">{{pntg.price.leader}}</span> <span ng-show="!pntg.price.leader"> you can be first!</span></div>
-	<div ng-show="pntg.price.previous">Previous: {{pntg.price.previous}}</div>
-	<div ng-repeat="img in pntg.pic.pics">
-		<img ng-src="{{img.path}}"  alt="" width="200">
+	<div class="pntg-images-wrapper">
+		<div ng-repeat="img in pntg.pic.pics">
+			<img ng-src="{{img.path}}"  alt="">
+		</div>
+	</div>
+
+	<div class="pntg-auction">
+		<div>Name: {{pntg.pic.name}}</div>
+		<div>Description: {{pntg.pic.description}}</div>
+		<br>
+		<div>Current Price: <strong>{{pntg.price.currentPrice}}</strong></div>
+		<div>Reserve Price: <span ng-show="pntg.price.reservePriceMet">met</span> <span ng-show="!pntg.price.reservePriceMet">not met</span></div>
+		<div>Make a bid: <input type="number" ng-model="pntg.newBid"><button ng-disabled="!pntg.newBid" ng-click="pntg.setNewBid(pntg.newBid)">set</button></div>
+		<small>next min bid: {{pntg.price.nextMinBid}}</small>
+		<div>Leader: <span ng-show="pntg.price.leader">{{pntg.price.leader}}</span> <span ng-show="!pntg.price.leader"> you can be first!</span></div>
+		<div ng-show="pntg.price.previous">Previous: {{pntg.price.previous}}</div>
 	</div>
 </div>
 
 
 <div ng-show="pntg.showLogin">
 	<login></login>
+</div>
 </div>

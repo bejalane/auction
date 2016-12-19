@@ -54,13 +54,18 @@ app.controller('homeCtrl', function($scope, $rootScope, rootSvc, dataSvc, $locat
     });
 
     home.getPaintingsBySeason = function(season){
+        $('.home-pics-carousel').css('opacity', 0);
         dataSvc.getPaintingsBySeason(season._id).then(
             function(res){
                 console.log(res);
                 if(res.code === 0){
                     home.seasonPaintings = res.data;
                     filterSrcForImg(res.data);
-                    setTimeout(GLOBAL_jqueryCustom, 1000);
+                    setTimeout(function(){
+                        GLOBAL_jqueryCustom();
+                        GLOBAL_flag_season_ready = true;
+                    }, 1000);
+
                     loadSeasonsPrices();
                 }
             },
@@ -96,7 +101,7 @@ app.controller('homeCtrl', function($scope, $rootScope, rootSvc, dataSvc, $locat
     home.changeSeason = function(season){
         home.currentSeason = season;
         home.getPaintingsBySeason(home.currentSeason);
-
+        GLOBAL_flag_season_ready = false;
         loadSeasonsPrices();
     }
 

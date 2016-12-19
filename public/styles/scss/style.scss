@@ -1,6 +1,10 @@
 $bg-color-main: #000;
 $font-color-main: #fff;
 
+body {
+	font-family: 'Muli', sans-serif;
+}
+
 @mixin call-btn-color(){
 	background: rgba(55,73,148,1);
 background: -moz-linear-gradient(left, rgba(55,73,148,1) 0%, rgba(89,100,171,1) 41%, rgba(91,131,201,1) 100%);
@@ -60,18 +64,16 @@ header {
 	display: inline-block;
 	font-size: 40px;
 	color: $font-color-main;
-	font-family: sans-serif;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	position: relative;
 	top: 40px;
-	font-weight: 100;
+	font-weight: 600;
 }
 
 .nav-login-wrapper, .nav-seasons-wrapper {
 	color: $font-color-main;
 	float: left;
-	font-family: sans-serif;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	font-size: 10px;
@@ -106,6 +108,35 @@ header {
 	color: #5B82C8;
 }
 
+.nav-seasons-wrapper button, 
+.nav-seasons-wrapper button:active, 
+.nav-seasons-wrapper button:hover, 
+.nav-seasons-wrapper ul, 
+.nav-seasons-wrapper li,
+.nav-seasons-wrapper a {
+	background-color: transparent!important;
+	border-color: transparent!important;
+	outline: none!important;
+    letter-spacing: 2px;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.nav-seasons-wrapper .dropdown-menu {
+	right: -10px;
+	left: auto;
+	text-align: right;
+}
+.nav-seasons-wrapper .dropdown-menu>li>a {
+	cursor: pointer;
+	color: #D3D3D3;
+}
+.nav-seasons-wrapper .dropdown-menu>li>a:hover {
+	color: #979797;
+}
+
+
+
 .home-paintings-slider {
 	overflow: hidden;
 	position: relative;
@@ -115,15 +146,17 @@ header {
 .home-pics-carousel {
 	width: auto;
 	padding-top: 20vh;
-	height: 150px;
+	// height: 150px;
 	position: relative;
 	left: 0;
+	text-align: center;
 }
 
 .home-pics-carousel .item {
 	height: 150px;
-	float: left;
+	// float: left;
 	margin: 0 40px;
+	display: inline-block;
 
 }
 
@@ -225,6 +258,57 @@ header {
 }
 
 
+//Paintings Page
+.pntg-images-wrapper {
+	width: 50%;
+	float: left;
+}
+
+.pntg-images-wrapper img {
+	width: 100%;
+}
+
+.pntg-auction {
+	width: 50%;
+	float: left;
+	box-sizing: border-box;
+	padding:  0 40px;
+
+	color: #BEBEBE;
+	line-height: 1.5;
+	font-size: 20px;
+	font-weight: 200;
+
+}
+
+.pntg-auction input {
+	border: 1px solid #BEBEBE;
+	background-color: transparent;
+	width: 100px;
+}
+
+.pntg-auction button {
+	padding: 0 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Backoffice
 .backoffice-dashboard-container .form-control {
 	width: 50%;
@@ -264,3 +348,4 @@ header {
 .divTableBody {
 	display: table-row-group;
 }
+
